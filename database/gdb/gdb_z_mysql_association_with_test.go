@@ -8,10 +8,11 @@ package gdb_test
 
 import (
 	"fmt"
+	"testing"
+
 	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/test/gtest"
 	"github.com/gogf/gf/util/gmeta"
-	"testing"
 )
 
 func Test_Table_Relation_With_Scan(t *testing.T) {

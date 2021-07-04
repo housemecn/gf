@@ -9,12 +9,13 @@ package gproc
 import (
 	"context"
 	"fmt"
-	"github.com/gogf/gf/errors/gerror"
-	"github.com/gogf/gf/internal/intlog"
 	"os"
 	"os/exec"
 	"runtime"
 	"strings"
+
+	"github.com/gogf/gf/errors/gerror"
+	"github.com/gogf/gf/internal/intlog"
 )
 
 // Process is the struct for a single process.

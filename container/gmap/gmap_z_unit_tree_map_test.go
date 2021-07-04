@@ -7,14 +7,15 @@
 package gmap_test
 
 import (
-	"github.com/gogf/gf/frame/g"
-	"github.com/gogf/gf/internal/json"
-	"github.com/gogf/gf/util/gconv"
-	"testing"
-
-	"github.com/gogf/gf/container/gmap"
-	"github.com/gogf/gf/test/gtest"
-	"github.com/gogf/gf/util/gutil"
+    "testing"
+    
+    "github.com/gogf/gf/frame/g"
+    "github.com/gogf/gf/internal/json"
+    "github.com/gogf/gf/util/gconv"
+    
+    "github.com/gogf/gf/container/gmap"
+    "github.com/gogf/gf/test/gtest"
+    "github.com/gogf/gf/util/gutil"
 )
 
 func Test_TreeMap_Var(t *testing.T) {

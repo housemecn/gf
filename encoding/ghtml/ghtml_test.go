@@ -7,8 +7,9 @@
 package ghtml_test
 
 import (
-	"github.com/gogf/gf/frame/g"
 	"testing"
+
+	"github.com/gogf/gf/frame/g"
 
 	"github.com/gogf/gf/encoding/ghtml"
 	"github.com/gogf/gf/test/gtest"

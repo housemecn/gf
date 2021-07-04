@@ -7,10 +7,11 @@
 package gparser_test
 
 import (
-	"github.com/gogf/gf/encoding/gparser"
-	"testing"
-
-	"github.com/gogf/gf/test/gtest"
+    "testing"
+    
+    "github.com/gogf/gf/encoding/gparser"
+    
+    "github.com/gogf/gf/test/gtest"
 )
 
 func Test_Load_NewWithTag(t *testing.T) {

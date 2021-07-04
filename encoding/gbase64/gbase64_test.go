@@ -7,11 +7,12 @@
 package gbase64_test
 
 import (
-	"github.com/gogf/gf/debug/gdebug"
-	"testing"
-
-	"github.com/gogf/gf/encoding/gbase64"
-	"github.com/gogf/gf/test/gtest"
+    "testing"
+    
+    "github.com/gogf/gf/debug/gdebug"
+    
+    "github.com/gogf/gf/encoding/gbase64"
+    "github.com/gogf/gf/test/gtest"
 )
 
 type testPair struct {

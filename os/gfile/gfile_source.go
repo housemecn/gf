@@ -7,10 +7,11 @@
 package gfile
 
 import (
-	"github.com/gogf/gf/text/gstr"
 	"os"
 	"runtime"
 	"strings"
+
+	"github.com/gogf/gf/text/gstr"
 
 	"github.com/gogf/gf/text/gregex"
 )

@@ -19,10 +19,11 @@
 package gtimer
 
 import (
-	"github.com/gogf/gf/container/gtype"
 	"math"
 	"sync"
 	"time"
+
+	"github.com/gogf/gf/container/gtype"
 
 	"github.com/gogf/gf/os/gcmd"
 )

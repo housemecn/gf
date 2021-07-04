@@ -7,9 +7,10 @@
 package gtype
 
 import (
-	"github.com/gogf/gf/internal/json"
-	"github.com/gogf/gf/util/gconv"
-	"sync/atomic"
+    "sync/atomic"
+    
+    "github.com/gogf/gf/internal/json"
+    "github.com/gogf/gf/util/gconv"
 )
 
 // Interface is a struct for concurrent-safe operation for type interface{}.

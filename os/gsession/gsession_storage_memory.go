@@ -8,8 +8,9 @@ package gsession
 
 import (
 	"context"
-	"github.com/gogf/gf/container/gmap"
 	"time"
+
+	"github.com/gogf/gf/container/gmap"
 )
 
 // StorageMemory implements the Session Storage interface with memory.

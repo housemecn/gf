@@ -8,6 +8,7 @@ package gredis_test
 
 import (
 	"fmt"
+
 	"github.com/gogf/gf/container/gvar"
 	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/util/gutil"

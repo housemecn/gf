@@ -8,10 +8,11 @@ package gdb_test
 
 import (
 	"fmt"
+	"testing"
+
 	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/os/gtime"
 	"github.com/gogf/gf/test/gtest"
-	"testing"
 )
 
 // Using filter dose not affect the outside value inside function.

@@ -8,10 +8,11 @@ package gtest
 
 import (
 	"fmt"
-	"github.com/gogf/gf/internal/empty"
 	"os"
 	"reflect"
 	"testing"
+
+	"github.com/gogf/gf/internal/empty"
 
 	"github.com/gogf/gf/debug/gdebug"
 

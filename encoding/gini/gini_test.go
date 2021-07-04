@@ -7,10 +7,11 @@
 package gini_test
 
 import (
+	"testing"
+
 	"github.com/gogf/gf/encoding/gini"
 	"github.com/gogf/gf/encoding/gjson"
 	"github.com/gogf/gf/test/gtest"
-	"testing"
 )
 
 var iniContent = `

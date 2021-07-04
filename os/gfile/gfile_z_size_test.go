@@ -7,8 +7,9 @@
 package gfile_test
 
 import (
-	"github.com/gogf/gf/util/gconv"
 	"testing"
+
+	"github.com/gogf/gf/util/gconv"
 
 	"github.com/gogf/gf/os/gfile"
 	"github.com/gogf/gf/test/gtest"

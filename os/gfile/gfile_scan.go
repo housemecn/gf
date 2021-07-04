@@ -7,11 +7,12 @@
 package gfile
 
 import (
-	"github.com/gogf/gf/errors/gerror"
-	"github.com/gogf/gf/text/gstr"
 	"os"
 	"path/filepath"
 	"sort"
+
+	"github.com/gogf/gf/errors/gerror"
+	"github.com/gogf/gf/text/gstr"
 )
 
 const (

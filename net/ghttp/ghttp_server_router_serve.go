@@ -8,8 +8,9 @@ package ghttp
 
 import (
 	"fmt"
-	"github.com/gogf/gf/internal/json"
 	"strings"
+
+	"github.com/gogf/gf/internal/json"
 
 	"github.com/gogf/gf/container/glist"
 	"github.com/gogf/gf/text/gregex"

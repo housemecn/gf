@@ -9,6 +9,7 @@ package gsession
 
 import (
 	"errors"
+
 	"github.com/gogf/gf/util/guid"
 )
 

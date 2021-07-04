@@ -7,9 +7,10 @@
 package gvalid
 
 import (
-	"github.com/gogf/gf/text/gregex"
 	"strconv"
 	"strings"
+
+	"github.com/gogf/gf/text/gregex"
 )
 
 // checkResidentId checks whether given id a china resident id number.

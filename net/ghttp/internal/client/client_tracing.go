@@ -8,6 +8,10 @@ package client
 
 import (
 	"fmt"
+	"io/ioutil"
+	"net/http"
+	"net/http/httptrace"
+
 	"github.com/gogf/gf"
 	"github.com/gogf/gf/internal/utils"
 	"github.com/gogf/gf/net/ghttp/internal/httputil"
@@ -18,9 +22,6 @@ import (
 	"go.opentelemetry.io/otel/codes"
 	"go.opentelemetry.io/otel/propagation"
 	"go.opentelemetry.io/otel/trace"
-	"io/ioutil"
-	"net/http"
-	"net/http/httptrace"
 )
 
 const (

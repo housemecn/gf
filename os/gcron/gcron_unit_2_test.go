@@ -7,9 +7,10 @@
 package gcron_test
 
 import (
-	"github.com/gogf/gf/frame/g"
 	"testing"
 	"time"
+
+	"github.com/gogf/gf/frame/g"
 
 	"github.com/gogf/gf/container/garray"
 	"github.com/gogf/gf/os/gcron"

@@ -9,11 +9,12 @@ package gfsnotify
 
 import (
 	"context"
+	"sync"
+	"time"
+
 	"github.com/gogf/gf/container/gset"
 	"github.com/gogf/gf/errors/gerror"
 	"github.com/gogf/gf/internal/intlog"
-	"sync"
-	"time"
 
 	"github.com/fsnotify/fsnotify"
 	"github.com/gogf/gf/container/glist"

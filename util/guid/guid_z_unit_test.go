@@ -9,9 +9,10 @@
 package guid_test
 
 import (
+	"testing"
+
 	"github.com/gogf/gf/container/gset"
 	"github.com/gogf/gf/util/guid"
-	"testing"
 
 	"github.com/gogf/gf/test/gtest"
 )

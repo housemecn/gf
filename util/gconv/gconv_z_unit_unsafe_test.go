@@ -7,9 +7,10 @@
 package gconv_test
 
 import (
+	"testing"
+
 	"github.com/gogf/gf/test/gtest"
 	"github.com/gogf/gf/util/gconv"
-	"testing"
 )
 
 func Test_Unsafe(t *testing.T) {

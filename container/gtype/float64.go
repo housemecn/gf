@@ -7,11 +7,12 @@
 package gtype
 
 import (
-	"github.com/gogf/gf/util/gconv"
-	"math"
-	"strconv"
-	"sync/atomic"
-	"unsafe"
+    "math"
+    "strconv"
+    "sync/atomic"
+    "unsafe"
+    
+    "github.com/gogf/gf/util/gconv"
 )
 
 // Float64 is a struct for concurrent-safe operation for type float64.

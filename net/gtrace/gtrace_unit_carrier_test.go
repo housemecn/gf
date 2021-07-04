@@ -8,12 +8,13 @@ package gtrace_test
 
 import (
 	"context"
+	"testing"
+
 	"github.com/gogf/gf/net/gtrace"
 	"github.com/gogf/gf/test/gtest"
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/oteltest"
 	"go.opentelemetry.io/otel/trace"
-	"testing"
 )
 
 const (

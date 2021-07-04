@@ -8,8 +8,9 @@ package gdb
 
 import (
 	"fmt"
-	"github.com/gogf/gf/errors/gerror"
 	"reflect"
+
+	"github.com/gogf/gf/errors/gerror"
 
 	"github.com/gogf/gf/container/gset"
 	"github.com/gogf/gf/container/gvar"

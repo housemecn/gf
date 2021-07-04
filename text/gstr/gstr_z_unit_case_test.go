@@ -7,8 +7,9 @@
 package gstr_test
 
 import (
-	"github.com/gogf/gf/test/gtest"
 	"testing"
+
+	"github.com/gogf/gf/test/gtest"
 
 	"github.com/gogf/gf/text/gstr"
 )

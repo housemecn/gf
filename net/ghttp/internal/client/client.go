@@ -11,17 +11,18 @@ import (
 	"crypto/rand"
 	"crypto/tls"
 	"fmt"
-	"github.com/gogf/gf"
-	"github.com/gogf/gf/errors/gerror"
-	"github.com/gogf/gf/os/gfile"
-	"github.com/gogf/gf/text/gstr"
-	"golang.org/x/net/proxy"
 	"net"
 	"net/http"
 	"net/http/cookiejar"
 	"net/url"
 	"strings"
 	"time"
+
+	"github.com/gogf/gf"
+	"github.com/gogf/gf/errors/gerror"
+	"github.com/gogf/gf/os/gfile"
+	"github.com/gogf/gf/text/gstr"
+	"golang.org/x/net/proxy"
 
 	"github.com/gogf/gf/text/gregex"
 )

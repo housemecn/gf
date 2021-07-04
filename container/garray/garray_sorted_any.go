@@ -7,18 +7,19 @@
 package garray
 
 import (
-	"bytes"
-	"fmt"
-	"github.com/gogf/gf/internal/empty"
-	"github.com/gogf/gf/internal/json"
-	"github.com/gogf/gf/text/gstr"
-	"github.com/gogf/gf/util/gutil"
-	"math"
-	"sort"
-
-	"github.com/gogf/gf/internal/rwmutex"
-	"github.com/gogf/gf/util/gconv"
-	"github.com/gogf/gf/util/grand"
+    "bytes"
+    "fmt"
+    "math"
+    "sort"
+    
+    "github.com/gogf/gf/internal/empty"
+    "github.com/gogf/gf/internal/json"
+    "github.com/gogf/gf/text/gstr"
+    "github.com/gogf/gf/util/gutil"
+    
+    "github.com/gogf/gf/internal/rwmutex"
+    "github.com/gogf/gf/util/gconv"
+    "github.com/gogf/gf/util/grand"
 )
 
 // SortedArray is a golang sorted array with rich features.

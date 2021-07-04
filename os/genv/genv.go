@@ -8,10 +8,11 @@
 package genv
 
 import (
-	"github.com/gogf/gf/container/gvar"
-	"github.com/gogf/gf/os/gcmd"
 	"os"
 	"strings"
+
+	"github.com/gogf/gf/container/gvar"
+	"github.com/gogf/gf/os/gcmd"
 )
 
 // All returns a copy of strings representing the environment,

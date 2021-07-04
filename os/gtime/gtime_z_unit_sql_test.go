@@ -1,9 +1,10 @@
 package gtime_test
 
 import (
+	"testing"
+
 	"github.com/gogf/gf/os/gtime"
 	"github.com/gogf/gf/test/gtest"
-	"testing"
 )
 
 func TestTime_Scan(t1 *testing.T) {

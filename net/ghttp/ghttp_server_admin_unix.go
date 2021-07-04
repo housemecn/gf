@@ -10,10 +10,11 @@ package ghttp
 
 import (
 	"context"
-	"github.com/gogf/gf/internal/intlog"
 	"os"
 	"os/signal"
 	"syscall"
+
+	"github.com/gogf/gf/internal/intlog"
 )
 
 // procSignalChan is the channel for listening the signal.

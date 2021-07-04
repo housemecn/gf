@@ -7,15 +7,16 @@
 package gtree
 
 import (
-	"bytes"
-	"fmt"
-	"github.com/gogf/gf/internal/json"
-	"strings"
-
-	"github.com/gogf/gf/util/gconv"
-
-	"github.com/gogf/gf/container/gvar"
-	"github.com/gogf/gf/internal/rwmutex"
+    "bytes"
+    "fmt"
+    "strings"
+    
+    "github.com/gogf/gf/internal/json"
+    
+    "github.com/gogf/gf/util/gconv"
+    
+    "github.com/gogf/gf/container/gvar"
+    "github.com/gogf/gf/internal/rwmutex"
 )
 
 // BTree holds elements of the B-tree.

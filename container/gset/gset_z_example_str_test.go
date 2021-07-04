@@ -7,9 +7,10 @@
 package gset_test
 
 import (
-	"fmt"
-	"github.com/gogf/gf/container/gset"
-	"github.com/gogf/gf/frame/g"
+    "fmt"
+    
+    "github.com/gogf/gf/container/gset"
+    "github.com/gogf/gf/frame/g"
 )
 
 func ExampleStrSet_Contains() {

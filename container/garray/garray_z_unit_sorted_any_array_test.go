@@ -9,12 +9,13 @@
 package garray_test
 
 import (
-	"github.com/gogf/gf/frame/g"
-	"github.com/gogf/gf/internal/json"
-	"github.com/gogf/gf/util/gutil"
 	"strings"
 	"testing"
 	"time"
+
+	"github.com/gogf/gf/frame/g"
+	"github.com/gogf/gf/internal/json"
+	"github.com/gogf/gf/util/gutil"
 
 	"github.com/gogf/gf/container/garray"
 	"github.com/gogf/gf/test/gtest"

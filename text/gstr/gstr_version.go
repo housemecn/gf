@@ -7,8 +7,9 @@
 package gstr
 
 import (
-	"github.com/gogf/gf/util/gconv"
 	"strings"
+
+	"github.com/gogf/gf/util/gconv"
 )
 
 // CompareVersion compares <a> and <b> as standard GNU version.

@@ -9,6 +9,7 @@ package gerror_test
 import (
 	"errors"
 	"fmt"
+
 	"github.com/gogf/gf/errors/gerror"
 )
 

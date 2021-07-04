@@ -7,13 +7,14 @@
 package gcompress_test
 
 import (
-	"github.com/gogf/gf/debug/gdebug"
-	"github.com/gogf/gf/os/gfile"
-	"github.com/gogf/gf/os/gtime"
-	"testing"
-
-	"github.com/gogf/gf/encoding/gcompress"
-	"github.com/gogf/gf/test/gtest"
+    "testing"
+    
+    "github.com/gogf/gf/debug/gdebug"
+    "github.com/gogf/gf/os/gfile"
+    "github.com/gogf/gf/os/gtime"
+    
+    "github.com/gogf/gf/encoding/gcompress"
+    "github.com/gogf/gf/test/gtest"
 )
 
 func Test_Gzip_UnGzip(t *testing.T) {

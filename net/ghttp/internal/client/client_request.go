@@ -9,11 +9,6 @@ package client
 import (
 	"bytes"
 	"context"
-	"github.com/gogf/gf/errors/gerror"
-	"github.com/gogf/gf/internal/intlog"
-	"github.com/gogf/gf/internal/json"
-	"github.com/gogf/gf/internal/utils"
-	"github.com/gogf/gf/net/ghttp/internal/httputil"
 	"io"
 	"io/ioutil"
 	"mime/multipart"
@@ -21,6 +16,12 @@ import (
 	"os"
 	"strings"
 	"time"
+
+	"github.com/gogf/gf/errors/gerror"
+	"github.com/gogf/gf/internal/intlog"
+	"github.com/gogf/gf/internal/json"
+	"github.com/gogf/gf/internal/utils"
+	"github.com/gogf/gf/net/ghttp/internal/httputil"
 
 	"github.com/gogf/gf/encoding/gparser"
 	"github.com/gogf/gf/text/gregex"

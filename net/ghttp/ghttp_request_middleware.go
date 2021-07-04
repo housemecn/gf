@@ -7,9 +7,10 @@
 package ghttp
 
 import (
-	"github.com/gogf/gf/errors/gerror"
 	"net/http"
 	"reflect"
+
+	"github.com/gogf/gf/errors/gerror"
 
 	"github.com/gogf/gf/util/gutil"
 )

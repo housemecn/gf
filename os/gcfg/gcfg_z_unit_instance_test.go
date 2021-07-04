@@ -9,12 +9,13 @@
 package gcfg
 
 import (
+	"testing"
+
 	"github.com/gogf/gf/container/gmap"
 	"github.com/gogf/gf/debug/gdebug"
 	"github.com/gogf/gf/os/genv"
 	"github.com/gogf/gf/os/gfile"
 	"github.com/gogf/gf/test/gtest"
-	"testing"
 )
 
 func Test_Instance_Basic(t *testing.T) {

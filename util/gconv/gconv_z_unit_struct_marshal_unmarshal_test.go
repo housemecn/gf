@@ -7,6 +7,9 @@
 package gconv_test
 
 import (
+	"testing"
+	"time"
+
 	"github.com/gogf/gf/crypto/gcrc32"
 	"github.com/gogf/gf/encoding/gbinary"
 	"github.com/gogf/gf/errors/gerror"
@@ -14,8 +17,6 @@ import (
 	"github.com/gogf/gf/os/gtime"
 	"github.com/gogf/gf/test/gtest"
 	"github.com/gogf/gf/util/gconv"
-	"testing"
-	"time"
 )
 
 type MyTime struct {

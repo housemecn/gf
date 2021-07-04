@@ -8,9 +8,10 @@
 package gbase64
 
 import (
-	"encoding/base64"
-	"github.com/gogf/gf/util/gconv"
-	"io/ioutil"
+    "encoding/base64"
+    "io/ioutil"
+    
+    "github.com/gogf/gf/util/gconv"
 )
 
 // Encode encodes bytes with BASE64 algorithm.

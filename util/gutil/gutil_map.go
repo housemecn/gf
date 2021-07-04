@@ -7,8 +7,9 @@
 package gutil
 
 import (
-	"github.com/gogf/gf/internal/utils"
 	"reflect"
+
+	"github.com/gogf/gf/internal/utils"
 )
 
 // MapCopy does a shallow copy from map `data` to `copy` for most commonly used map type

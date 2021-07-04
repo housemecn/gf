@@ -16,8 +16,9 @@ package gredis
 import (
 	"context"
 	"fmt"
-	"github.com/gogf/gf/internal/intlog"
 	"time"
+
+	"github.com/gogf/gf/internal/intlog"
 
 	"github.com/gogf/gf/container/gmap"
 	"github.com/gogf/gf/container/gvar"

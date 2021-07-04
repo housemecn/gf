@@ -9,10 +9,11 @@ package gi18n
 import (
 	"context"
 	"fmt"
-	"github.com/gogf/gf/errors/gerror"
-	"github.com/gogf/gf/internal/intlog"
 	"strings"
 	"sync"
+
+	"github.com/gogf/gf/errors/gerror"
+	"github.com/gogf/gf/internal/intlog"
 
 	"github.com/gogf/gf/os/gfsnotify"
 

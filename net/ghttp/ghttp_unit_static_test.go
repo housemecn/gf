@@ -10,9 +10,10 @@ package ghttp_test
 
 import (
 	"fmt"
-	"github.com/gogf/gf/debug/gdebug"
 	"testing"
 	"time"
+
+	"github.com/gogf/gf/debug/gdebug"
 
 	"github.com/gogf/gf/text/gstr"
 

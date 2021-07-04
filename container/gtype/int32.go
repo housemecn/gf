@@ -7,9 +7,10 @@
 package gtype
 
 import (
-	"github.com/gogf/gf/util/gconv"
-	"strconv"
-	"sync/atomic"
+    "strconv"
+    "sync/atomic"
+    
+    "github.com/gogf/gf/util/gconv"
 )
 
 // Int32 is a struct for concurrent-safe operation for type int32.

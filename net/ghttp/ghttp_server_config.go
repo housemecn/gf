@@ -10,12 +10,13 @@ import (
 	"context"
 	"crypto/tls"
 	"fmt"
-	"github.com/gogf/gf/internal/intlog"
-	"github.com/gogf/gf/os/gres"
-	"github.com/gogf/gf/util/gutil"
 	"net/http"
 	"strconv"
 	"time"
+
+	"github.com/gogf/gf/internal/intlog"
+	"github.com/gogf/gf/os/gres"
+	"github.com/gogf/gf/util/gutil"
 
 	"github.com/gogf/gf/util/gconv"
 

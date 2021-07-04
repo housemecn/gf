@@ -9,14 +9,15 @@ package ghttp
 import (
 	"bytes"
 	"context"
-	"github.com/gogf/gf/debug/gdebug"
-	"github.com/gogf/gf/errors/gerror"
-	"github.com/gogf/gf/internal/intlog"
 	"net/http"
 	"os"
 	"runtime"
 	"strings"
 	"time"
+
+	"github.com/gogf/gf/debug/gdebug"
+	"github.com/gogf/gf/errors/gerror"
+	"github.com/gogf/gf/internal/intlog"
 
 	"github.com/gogf/gf/os/gsession"
 

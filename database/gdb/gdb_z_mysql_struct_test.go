@@ -8,14 +8,15 @@ package gdb_test
 
 import (
 	"database/sql"
+	"reflect"
+	"testing"
+
 	"github.com/gogf/gf/database/gdb"
 	"github.com/gogf/gf/errors/gerror"
 	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/os/gtime"
 	"github.com/gogf/gf/test/gtest"
 	"github.com/gogf/gf/util/gconv"
-	"reflect"
-	"testing"
 )
 
 func Test_Model_Embedded_Insert(t *testing.T) {

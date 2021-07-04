@@ -8,13 +8,14 @@ package gdebug
 
 import (
 	"fmt"
-	"github.com/gogf/gf/internal/utils"
 	"os"
 	"os/exec"
 	"path/filepath"
 	"reflect"
 	"runtime"
 	"strings"
+
+	"github.com/gogf/gf/internal/utils"
 )
 
 const (

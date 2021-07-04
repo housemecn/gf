@@ -3,11 +3,12 @@ package main
 import (
 	"archive/zip"
 	"fmt"
-	"github.com/gogf/gf/encoding/gcompress"
 	"io"
 	"os"
 	"path/filepath"
 	"strings"
+
+	"github.com/gogf/gf/encoding/gcompress"
 )
 
 // srcFile could be a single file or a directory

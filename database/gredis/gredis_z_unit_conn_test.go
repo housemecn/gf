@@ -7,10 +7,11 @@
 package gredis_test
 
 import (
-	"github.com/gogf/gf/database/gredis"
-	"github.com/gogf/gf/test/gtest"
 	"testing"
 	"time"
+
+	"github.com/gogf/gf/database/gredis"
+	"github.com/gogf/gf/test/gtest"
 )
 
 func TestConn_DoWithTimeout(t *testing.T) {

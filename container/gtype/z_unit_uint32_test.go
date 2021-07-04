@@ -7,13 +7,14 @@
 package gtype_test
 
 import (
+	"math"
+	"sync"
+	"testing"
+
 	"github.com/gogf/gf/container/gtype"
 	"github.com/gogf/gf/internal/json"
 	"github.com/gogf/gf/test/gtest"
 	"github.com/gogf/gf/util/gconv"
-	"math"
-	"sync"
-	"testing"
 )
 
 func Test_Uint32(t *testing.T) {

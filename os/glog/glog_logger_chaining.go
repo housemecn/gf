@@ -8,8 +8,9 @@ package glog
 
 import (
 	"context"
-	"github.com/gogf/gf/internal/intlog"
 	"io"
+
+	"github.com/gogf/gf/internal/intlog"
 
 	"github.com/gogf/gf/os/gfile"
 )

@@ -9,11 +9,12 @@ package glog_test
 import (
 	"bytes"
 	"context"
+	"testing"
+
 	"github.com/gogf/gf/container/garray"
 	"github.com/gogf/gf/os/glog"
 	"github.com/gogf/gf/test/gtest"
 	"github.com/gogf/gf/text/gstr"
-	"testing"
 )
 
 var arrayForHandlerTest1 = garray.NewStrArray()

@@ -7,13 +7,14 @@
 package gtree
 
 import (
-	"fmt"
-	"github.com/gogf/gf/internal/json"
-	"github.com/gogf/gf/util/gconv"
-	"github.com/gogf/gf/util/gutil"
-
-	"github.com/gogf/gf/container/gvar"
-	"github.com/gogf/gf/internal/rwmutex"
+    "fmt"
+    
+    "github.com/gogf/gf/internal/json"
+    "github.com/gogf/gf/util/gconv"
+    "github.com/gogf/gf/util/gutil"
+    
+    "github.com/gogf/gf/container/gvar"
+    "github.com/gogf/gf/internal/rwmutex"
 )
 
 type color bool

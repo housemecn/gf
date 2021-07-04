@@ -8,6 +8,7 @@ package gfsnotify
 
 import (
 	"context"
+
 	"github.com/gogf/gf/container/glist"
 	"github.com/gogf/gf/internal/intlog"
 )

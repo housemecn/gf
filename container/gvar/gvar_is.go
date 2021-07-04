@@ -7,8 +7,9 @@
 package gvar
 
 import (
-	"github.com/gogf/gf/internal/empty"
-	"reflect"
+    "reflect"
+    
+    "github.com/gogf/gf/internal/empty"
 )
 
 // IsNil checks whether <v> is nil.

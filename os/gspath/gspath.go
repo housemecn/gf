@@ -13,11 +13,12 @@ package gspath
 
 import (
 	"context"
-	"github.com/gogf/gf/errors/gerror"
-	"github.com/gogf/gf/internal/intlog"
 	"os"
 	"sort"
 	"strings"
+
+	"github.com/gogf/gf/errors/gerror"
+	"github.com/gogf/gf/internal/intlog"
 
 	"github.com/gogf/gf/container/garray"
 	"github.com/gogf/gf/container/gmap"

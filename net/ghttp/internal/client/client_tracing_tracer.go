@@ -10,18 +10,19 @@ import (
 	"context"
 	"crypto/tls"
 	"fmt"
-	"github.com/gogf/gf/internal/utils"
-	"github.com/gogf/gf/net/gtrace"
-	"github.com/gogf/gf/text/gstr"
-	"go.opentelemetry.io/otel/attribute"
-	"go.opentelemetry.io/otel/codes"
-	"go.opentelemetry.io/otel/trace"
 	"io/ioutil"
 	"net/http"
 	"net/http/httptrace"
 	"net/textproto"
 	"strings"
 	"sync"
+
+	"github.com/gogf/gf/internal/utils"
+	"github.com/gogf/gf/net/gtrace"
+	"github.com/gogf/gf/text/gstr"
+	"go.opentelemetry.io/otel/attribute"
+	"go.opentelemetry.io/otel/codes"
+	"go.opentelemetry.io/otel/trace"
 )
 
 type clientTracer struct {

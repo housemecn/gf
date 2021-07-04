@@ -9,11 +9,12 @@ package gdb_test
 import (
 	"context"
 	"fmt"
+	"testing"
+	"time"
+
 	"github.com/gogf/gf/container/garray"
 	"github.com/gogf/gf/encoding/gparser"
 	"github.com/gogf/gf/text/gstr"
-	"testing"
-	"time"
 
 	"github.com/gogf/gf/database/gdb"
 	"github.com/gogf/gf/encoding/gjson"

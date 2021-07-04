@@ -9,9 +9,10 @@ package gutil
 
 import (
 	"fmt"
+	"reflect"
+
 	"github.com/gogf/gf/internal/empty"
 	"github.com/gogf/gf/util/gconv"
-	"reflect"
 )
 
 // Throw throws out an exception, which can be caught be TryCatch or recover.

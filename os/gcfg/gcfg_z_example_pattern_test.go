@@ -8,6 +8,7 @@ package gcfg_test
 
 import (
 	"fmt"
+
 	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/internal/intlog"
 	"github.com/gogf/gf/os/gcfg"

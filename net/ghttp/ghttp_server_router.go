@@ -8,9 +8,10 @@ package ghttp
 
 import (
 	"fmt"
+	"strings"
+
 	"github.com/gogf/gf/container/gtype"
 	"github.com/gogf/gf/errors/gerror"
-	"strings"
 
 	"github.com/gogf/gf/debug/gdebug"
 

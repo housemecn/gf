@@ -10,6 +10,11 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	htmltpl "html/template"
+	"strconv"
+	"strings"
+	texttpl "text/template"
+
 	"github.com/gogf/gf/encoding/ghash"
 	"github.com/gogf/gf/errors/gerror"
 	"github.com/gogf/gf/internal/intlog"
@@ -18,10 +23,6 @@ import (
 	"github.com/gogf/gf/text/gstr"
 	"github.com/gogf/gf/util/gconv"
 	"github.com/gogf/gf/util/gutil"
-	htmltpl "html/template"
-	"strconv"
-	"strings"
-	texttpl "text/template"
 
 	"github.com/gogf/gf/os/gres"
 

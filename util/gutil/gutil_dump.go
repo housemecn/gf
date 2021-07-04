@@ -9,10 +9,11 @@ package gutil
 import (
 	"bytes"
 	"fmt"
-	"github.com/gogf/gf/internal/json"
-	"github.com/gogf/gf/util/gconv"
 	"os"
 	"reflect"
+
+	"github.com/gogf/gf/internal/json"
+	"github.com/gogf/gf/util/gconv"
 )
 
 // apiVal is used for type assert api for Val().

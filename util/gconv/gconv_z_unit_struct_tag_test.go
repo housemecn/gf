@@ -7,10 +7,11 @@
 package gconv_test
 
 import (
+	"testing"
+
 	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/test/gtest"
 	"github.com/gogf/gf/util/gconv"
-	"testing"
 )
 
 func Test_StructTag(t *testing.T) {

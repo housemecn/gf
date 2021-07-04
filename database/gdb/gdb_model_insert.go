@@ -9,8 +9,9 @@ package gdb
 import (
 	"database/sql"
 	"fmt"
-	"github.com/gogf/gf/container/gset"
 	"reflect"
+
+	"github.com/gogf/gf/container/gset"
 
 	"github.com/gogf/gf/errors/gerror"
 	"github.com/gogf/gf/os/gtime"

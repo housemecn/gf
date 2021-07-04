@@ -3,6 +3,9 @@ package main
 import (
 	"bytes"
 	"fmt"
+	"io/ioutil"
+	"net/http"
+
 	"github.com/gogf/gf/container/garray"
 	"github.com/gogf/gf/crypto/gmd5"
 	"github.com/gogf/gf/frame/g"
@@ -12,8 +15,6 @@ import (
 	"github.com/gogf/gf/util/gconv"
 	"github.com/gogf/gf/util/guid"
 	"github.com/gogf/gf/util/gutil"
-	"io/ioutil"
-	"net/http"
 )
 
 const (

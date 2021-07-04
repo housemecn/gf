@@ -7,16 +7,17 @@
 package gcompress
 
 import (
-	"archive/zip"
-	"bytes"
-	"context"
-	"github.com/gogf/gf/internal/intlog"
-	"github.com/gogf/gf/os/gfile"
-	"github.com/gogf/gf/text/gstr"
-	"io"
-	"os"
-	"path/filepath"
-	"strings"
+    "archive/zip"
+    "bytes"
+    "context"
+    "io"
+    "os"
+    "path/filepath"
+    "strings"
+    
+    "github.com/gogf/gf/internal/intlog"
+    "github.com/gogf/gf/os/gfile"
+    "github.com/gogf/gf/text/gstr"
 )
 
 // ZipPath compresses <paths> to <dest> using zip compressing algorithm.

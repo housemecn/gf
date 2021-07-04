@@ -7,14 +7,15 @@
 package gconv_test
 
 import (
+	"testing"
+	"time"
+
 	"github.com/gogf/gf/container/gvar"
 	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/internal/json"
 	"github.com/gogf/gf/os/gtime"
 	"github.com/gogf/gf/test/gtest"
 	"github.com/gogf/gf/util/gconv"
-	"testing"
-	"time"
 )
 
 func Test_Struct_Basic1(t *testing.T) {

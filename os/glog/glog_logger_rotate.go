@@ -8,6 +8,8 @@ package glog
 
 import (
 	"fmt"
+	"time"
+
 	"github.com/gogf/gf/container/garray"
 	"github.com/gogf/gf/encoding/gcompress"
 	"github.com/gogf/gf/internal/intlog"
@@ -16,7 +18,6 @@ import (
 	"github.com/gogf/gf/os/gtime"
 	"github.com/gogf/gf/os/gtimer"
 	"github.com/gogf/gf/text/gregex"
-	"time"
 )
 
 const (

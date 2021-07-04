@@ -1,8 +1,9 @@
 package main
 
 import (
-	"github.com/gogf/gf/frame/g"
 	"time"
+
+	"github.com/gogf/gf/frame/g"
 )
 
 func test1() {

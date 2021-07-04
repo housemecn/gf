@@ -9,8 +9,9 @@
 package gmode_test
 
 import (
-	"github.com/gogf/gf/util/gmode"
 	"testing"
+
+	"github.com/gogf/gf/util/gmode"
 
 	"github.com/gogf/gf/test/gtest"
 )

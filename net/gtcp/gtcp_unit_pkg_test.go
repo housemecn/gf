@@ -8,11 +8,12 @@ package gtcp_test
 
 import (
 	"fmt"
+	"testing"
+	"time"
+
 	"github.com/gogf/gf/net/gtcp"
 	"github.com/gogf/gf/test/gtest"
 	"github.com/gogf/gf/util/gconv"
-	"testing"
-	"time"
 )
 
 func Test_Package_Basic(t *testing.T) {

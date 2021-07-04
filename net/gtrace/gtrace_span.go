@@ -8,6 +8,7 @@ package gtrace
 
 import (
 	"context"
+
 	"go.opentelemetry.io/otel/trace"
 )
 

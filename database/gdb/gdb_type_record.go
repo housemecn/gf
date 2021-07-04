@@ -8,6 +8,7 @@ package gdb
 
 import (
 	"database/sql"
+
 	"github.com/gogf/gf/container/gmap"
 	"github.com/gogf/gf/encoding/gparser"
 	"github.com/gogf/gf/internal/empty"

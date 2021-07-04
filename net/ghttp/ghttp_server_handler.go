@@ -7,11 +7,12 @@
 package ghttp
 
 import (
-	"github.com/gogf/gf/internal/intlog"
 	"net/http"
 	"os"
 	"sort"
 	"strings"
+
+	"github.com/gogf/gf/internal/intlog"
 
 	"github.com/gogf/gf/text/gstr"
 

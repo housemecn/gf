@@ -8,8 +8,9 @@ package gproc
 
 import (
 	"fmt"
-	"github.com/gogf/gf/internal/json"
 	"net"
+
+	"github.com/gogf/gf/internal/json"
 
 	"github.com/gogf/gf/container/gqueue"
 	"github.com/gogf/gf/container/gtype"

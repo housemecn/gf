@@ -7,9 +7,10 @@
 package gvalid
 
 import (
-	"github.com/gogf/gf/util/gconv"
 	"strconv"
 	"strings"
+
+	"github.com/gogf/gf/util/gconv"
 )
 
 // checkLength checks `value` using length rules.

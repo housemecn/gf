@@ -7,10 +7,11 @@
 package gtime_test
 
 import (
+	"testing"
+
 	"github.com/gogf/gf/internal/json"
 	"github.com/gogf/gf/os/gtime"
 	"github.com/gogf/gf/test/gtest"
-	"testing"
 )
 
 func Test_Json_Pointer(t *testing.T) {

@@ -8,8 +8,9 @@ package gvalid_test
 
 import (
 	"context"
-	"github.com/gogf/gf/errors/gerror"
 	"testing"
+
+	"github.com/gogf/gf/errors/gerror"
 
 	"github.com/gogf/gf/test/gtest"
 	"github.com/gogf/gf/util/gvalid"

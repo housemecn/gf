@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
-	"github.com/gogf/gf/os/gproc"
 	"os"
 	"time"
+
+	"github.com/gogf/gf/os/gproc"
 )
 
 func signalHandlerForMQ(sig os.Signal) {

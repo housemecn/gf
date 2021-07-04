@@ -7,14 +7,15 @@
 package gcompress_test
 
 import (
-	"bytes"
-	"github.com/gogf/gf/debug/gdebug"
-	"github.com/gogf/gf/encoding/gcompress"
-	"github.com/gogf/gf/os/gfile"
-	"github.com/gogf/gf/os/gtime"
-	"testing"
-
-	"github.com/gogf/gf/test/gtest"
+    "bytes"
+    "testing"
+    
+    "github.com/gogf/gf/debug/gdebug"
+    "github.com/gogf/gf/encoding/gcompress"
+    "github.com/gogf/gf/os/gfile"
+    "github.com/gogf/gf/os/gtime"
+    
+    "github.com/gogf/gf/test/gtest"
 )
 
 func Test_ZipPath(t *testing.T) {

@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
+
 	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/net/ghttp"
-	"io/ioutil"
 )
 
 func main() {

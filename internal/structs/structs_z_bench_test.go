@@ -7,8 +7,9 @@
 package structs_test
 
 import (
-	"github.com/gogf/gf/internal/structs"
-	"testing"
+    "testing"
+    
+    "github.com/gogf/gf/internal/structs"
 )
 
 type User struct {

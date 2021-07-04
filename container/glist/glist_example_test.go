@@ -9,6 +9,7 @@ package glist_test
 import (
 	"container/list"
 	"fmt"
+
 	"github.com/gogf/gf/container/garray"
 	"github.com/gogf/gf/frame/g"
 

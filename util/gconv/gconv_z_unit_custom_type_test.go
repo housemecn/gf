@@ -7,11 +7,12 @@
 package gconv_test
 
 import (
+	"testing"
+	"time"
+
 	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/test/gtest"
 	"github.com/gogf/gf/util/gconv"
-	"testing"
-	"time"
 )
 
 type Duration time.Duration

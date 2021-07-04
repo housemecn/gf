@@ -7,8 +7,9 @@
 package gudp
 
 import (
-	"github.com/gogf/gf/errors/gerror"
 	"net"
+
+	"github.com/gogf/gf/errors/gerror"
 
 	"github.com/gogf/gf/container/gmap"
 	"github.com/gogf/gf/os/glog"

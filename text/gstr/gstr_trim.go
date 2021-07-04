@@ -7,8 +7,9 @@
 package gstr
 
 import (
-	"github.com/gogf/gf/internal/utils"
 	"strings"
+
+	"github.com/gogf/gf/internal/utils"
 )
 
 // Trim strips whitespace (or other characters) from the beginning and end of a string.

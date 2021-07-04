@@ -8,11 +8,12 @@
 package gfpool
 
 import (
+	"os"
+	"time"
+
 	"github.com/gogf/gf/container/gmap"
 	"github.com/gogf/gf/container/gpool"
 	"github.com/gogf/gf/container/gtype"
-	"os"
-	"time"
 )
 
 // File pointer pool.

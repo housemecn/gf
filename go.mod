@@ -9,7 +9,7 @@ require (
 	github.com/gogf/mysql v1.6.1-0.20210603073548-16164ae25579
 	github.com/gomodule/redigo v2.0.0+incompatible
 	github.com/gorilla/websocket v1.4.2
-	github.com/grokify/html-strip-tags-go v0.0.1
+	github.com/grokify/html-strip-tags-go v0.0.2-0.20210305112959-44779767827b
 	github.com/mattn/go-runewidth v0.0.10 // indirect
 	github.com/olekukonko/tablewriter v0.0.5
 	github.com/shopspring/decimal v1.2.1-0.20210622222456-cc4584f0a5de

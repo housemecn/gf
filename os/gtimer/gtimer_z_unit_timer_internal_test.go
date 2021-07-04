@@ -7,10 +7,11 @@
 package gtimer
 
 import (
-	"github.com/gogf/gf/container/garray"
-	"github.com/gogf/gf/test/gtest"
 	"testing"
 	"time"
+
+	"github.com/gogf/gf/container/garray"
+	"github.com/gogf/gf/test/gtest"
 )
 
 func TestTimer_Proceed(t *testing.T) {

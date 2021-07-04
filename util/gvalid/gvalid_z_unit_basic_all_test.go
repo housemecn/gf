@@ -8,10 +8,11 @@ package gvalid_test
 
 import (
 	"context"
-	"github.com/gogf/gf/errors/gerror"
-	"github.com/gogf/gf/os/gtime"
 	"testing"
 	"time"
+
+	"github.com/gogf/gf/errors/gerror"
+	"github.com/gogf/gf/os/gtime"
 
 	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/test/gtest"

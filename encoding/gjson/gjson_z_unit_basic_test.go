@@ -7,8 +7,9 @@
 package gjson_test
 
 import (
-	"github.com/gogf/gf/container/gmap"
 	"testing"
+
+	"github.com/gogf/gf/container/gmap"
 
 	"github.com/gogf/gf/encoding/gjson"
 	"github.com/gogf/gf/frame/g"

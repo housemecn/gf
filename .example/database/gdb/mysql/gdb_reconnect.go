@@ -2,8 +2,9 @@ package main
 
 import (
 	"fmt"
-	"github.com/gogf/gf/frame/g"
 	"time"
+
+	"github.com/gogf/gf/frame/g"
 )
 
 func main() {

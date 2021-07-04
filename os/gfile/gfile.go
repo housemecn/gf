@@ -8,12 +8,13 @@
 package gfile
 
 import (
-	"github.com/gogf/gf/text/gstr"
 	"os"
 	"os/exec"
 	"path/filepath"
 	"strings"
 	"time"
+
+	"github.com/gogf/gf/text/gstr"
 
 	"github.com/gogf/gf/container/gtype"
 	"github.com/gogf/gf/util/gconv"

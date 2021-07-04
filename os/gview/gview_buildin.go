@@ -9,17 +9,17 @@ package gview
 import (
 	"context"
 	"fmt"
+	htmltpl "html/template"
+	"strings"
+
 	"github.com/gogf/gf/internal/json"
 	"github.com/gogf/gf/util/gutil"
-	"strings"
 
 	"github.com/gogf/gf/encoding/ghtml"
 	"github.com/gogf/gf/encoding/gurl"
 	"github.com/gogf/gf/os/gtime"
 	"github.com/gogf/gf/text/gstr"
 	"github.com/gogf/gf/util/gconv"
-
-	htmltpl "html/template"
 )
 
 // buildInFuncDump implements build-in template function: dump

@@ -7,10 +7,11 @@
 package gcompress
 
 import (
-	"bytes"
-	"compress/gzip"
-	"github.com/gogf/gf/os/gfile"
-	"io"
+    "bytes"
+    "compress/gzip"
+    "io"
+    
+    "github.com/gogf/gf/os/gfile"
 )
 
 // Gzip compresses <data> using gzip algorithm.

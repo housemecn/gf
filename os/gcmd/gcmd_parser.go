@@ -8,10 +8,11 @@
 package gcmd
 
 import (
-	"github.com/gogf/gf/errors/gerror"
-	"github.com/gogf/gf/internal/json"
 	"os"
 	"strings"
+
+	"github.com/gogf/gf/errors/gerror"
+	"github.com/gogf/gf/internal/json"
 
 	"github.com/gogf/gf/text/gstr"
 

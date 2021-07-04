@@ -7,9 +7,10 @@
 package gfile_test
 
 import (
+	"testing"
+
 	"github.com/gogf/gf/container/garray"
 	"github.com/gogf/gf/debug/gdebug"
-	"testing"
 
 	"github.com/gogf/gf/os/gfile"
 

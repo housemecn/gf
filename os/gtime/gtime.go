@@ -11,13 +11,14 @@ package gtime
 
 import (
 	"fmt"
-	"github.com/gogf/gf/errors/gerror"
-	"github.com/gogf/gf/internal/utils"
 	"os"
 	"regexp"
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/gogf/gf/errors/gerror"
+	"github.com/gogf/gf/internal/utils"
 
 	"github.com/gogf/gf/text/gregex"
 )

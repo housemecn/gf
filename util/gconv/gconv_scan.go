@@ -7,8 +7,9 @@
 package gconv
 
 import (
-	"github.com/gogf/gf/errors/gerror"
 	"reflect"
+
+	"github.com/gogf/gf/errors/gerror"
 )
 
 // Scan automatically calls MapToMap, MapToMaps, Struct or Structs function according to

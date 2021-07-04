@@ -20,13 +20,14 @@
 package gcharset
 
 import (
-	"bytes"
-	"github.com/gogf/gf/errors/gerror"
-	"io/ioutil"
-
-	"golang.org/x/text/encoding"
-	"golang.org/x/text/encoding/ianaindex"
-	"golang.org/x/text/transform"
+    "bytes"
+    "io/ioutil"
+    
+    "github.com/gogf/gf/errors/gerror"
+    
+    "golang.org/x/text/encoding"
+    "golang.org/x/text/encoding/ianaindex"
+    "golang.org/x/text/transform"
 )
 
 var (

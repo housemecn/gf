@@ -7,12 +7,13 @@
 package gtype_test
 
 import (
+	"sync"
+	"testing"
+
 	"github.com/gogf/gf/container/gtype"
 	"github.com/gogf/gf/internal/json"
 	"github.com/gogf/gf/test/gtest"
 	"github.com/gogf/gf/util/gconv"
-	"sync"
-	"testing"
 )
 
 func Test_Int(t *testing.T) {

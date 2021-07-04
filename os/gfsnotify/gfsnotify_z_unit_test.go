@@ -7,9 +7,10 @@
 package gfsnotify_test
 
 import (
-	"github.com/gogf/gf/container/garray"
 	"testing"
 	"time"
+
+	"github.com/gogf/gf/container/garray"
 
 	"github.com/gogf/gf/container/gtype"
 	"github.com/gogf/gf/os/gfile"

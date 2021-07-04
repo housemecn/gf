@@ -7,12 +7,13 @@
 package gtype_test
 
 import (
-	"github.com/gogf/gf/internal/json"
-	"github.com/gogf/gf/util/gconv"
-	"testing"
-
-	"github.com/gogf/gf/container/gtype"
-	"github.com/gogf/gf/test/gtest"
+    "testing"
+    
+    "github.com/gogf/gf/internal/json"
+    "github.com/gogf/gf/util/gconv"
+    
+    "github.com/gogf/gf/container/gtype"
+    "github.com/gogf/gf/test/gtest"
 )
 
 func Test_Bool(t *testing.T) {

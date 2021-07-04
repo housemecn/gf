@@ -1,9 +1,10 @@
 package main
 
 import (
+	"time"
+
 	"github.com/gogf/gf/database/gdb"
 	"github.com/gogf/gf/util/gutil"
-	"time"
 )
 
 func main() {

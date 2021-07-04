@@ -8,11 +8,12 @@
 package gset
 
 import (
-	"bytes"
-	"github.com/gogf/gf/internal/json"
-	"github.com/gogf/gf/internal/rwmutex"
-	"github.com/gogf/gf/text/gstr"
-	"github.com/gogf/gf/util/gconv"
+    "bytes"
+    
+    "github.com/gogf/gf/internal/json"
+    "github.com/gogf/gf/internal/rwmutex"
+    "github.com/gogf/gf/text/gstr"
+    "github.com/gogf/gf/util/gconv"
 )
 
 type Set struct {

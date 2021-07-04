@@ -7,9 +7,10 @@
 package gconv
 
 import (
+	"reflect"
+
 	"github.com/gogf/gf/errors/gerror"
 	"github.com/gogf/gf/internal/json"
-	"reflect"
 )
 
 // MapToMaps converts any slice type variable `params` to another map slice type variable `pointer`.

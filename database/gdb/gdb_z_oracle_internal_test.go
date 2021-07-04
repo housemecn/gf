@@ -7,8 +7,9 @@
 package gdb
 
 import (
-	"github.com/gogf/gf/test/gtest"
 	"testing"
+
+	"github.com/gogf/gf/test/gtest"
 )
 
 func Test_Oracle_parseSql(t *testing.T) {

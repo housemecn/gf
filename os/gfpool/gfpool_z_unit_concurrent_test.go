@@ -1,13 +1,14 @@
 package gfpool_test
 
 import (
+	"os"
+	"testing"
+
 	"github.com/gogf/gf/os/gfile"
 	"github.com/gogf/gf/os/gfpool"
 	"github.com/gogf/gf/os/gtime"
 	"github.com/gogf/gf/test/gtest"
 	"github.com/gogf/gf/text/gstr"
-	"os"
-	"testing"
 )
 
 func Test_ConcurrentOS(t *testing.T) {

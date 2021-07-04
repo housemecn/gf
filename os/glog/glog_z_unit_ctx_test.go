@@ -9,11 +9,12 @@ package glog_test
 import (
 	"bytes"
 	"context"
+	"testing"
+
 	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/os/glog"
 	"github.com/gogf/gf/test/gtest"
 	"github.com/gogf/gf/text/gstr"
-	"testing"
 )
 
 func Test_Ctx(t *testing.T) {

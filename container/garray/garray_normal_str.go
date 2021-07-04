@@ -7,17 +7,18 @@
 package garray
 
 import (
-	"bytes"
-	"github.com/gogf/gf/errors/gerror"
-	"github.com/gogf/gf/internal/json"
-	"github.com/gogf/gf/text/gstr"
-	"math"
-	"sort"
-	"strings"
-
-	"github.com/gogf/gf/internal/rwmutex"
-	"github.com/gogf/gf/util/gconv"
-	"github.com/gogf/gf/util/grand"
+    "bytes"
+    "math"
+    "sort"
+    "strings"
+    
+    "github.com/gogf/gf/errors/gerror"
+    "github.com/gogf/gf/internal/json"
+    "github.com/gogf/gf/text/gstr"
+    
+    "github.com/gogf/gf/internal/rwmutex"
+    "github.com/gogf/gf/util/gconv"
+    "github.com/gogf/gf/util/grand"
 )
 
 // StrArray is a golang string array with rich features.

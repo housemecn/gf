@@ -11,6 +11,7 @@ import (
 	"bytes"
 	"encoding/hex"
 	"fmt"
+
 	"github.com/gogf/gf/encoding/gbase64"
 	"github.com/gogf/gf/encoding/gcompress"
 	"github.com/gogf/gf/text/gstr"

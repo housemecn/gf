@@ -7,9 +7,10 @@
 package gmutex_test
 
 import (
-	"github.com/gogf/gf/os/glog"
 	"testing"
 	"time"
+
+	"github.com/gogf/gf/os/glog"
 
 	"github.com/gogf/gf/container/garray"
 	"github.com/gogf/gf/os/gmutex"

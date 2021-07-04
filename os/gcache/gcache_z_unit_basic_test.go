@@ -10,10 +10,11 @@ package gcache_test
 
 import (
 	"context"
-	"github.com/gogf/gf/util/guid"
 	"math"
 	"testing"
 	"time"
+
+	"github.com/gogf/gf/util/guid"
 
 	"github.com/gogf/gf/container/gset"
 	"github.com/gogf/gf/frame/g"

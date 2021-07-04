@@ -7,11 +7,12 @@
 package gvar_test
 
 import (
-	"github.com/gogf/gf/container/gvar"
-	"github.com/gogf/gf/frame/g"
-	"github.com/gogf/gf/test/gtest"
-	"github.com/gogf/gf/util/gconv"
-	"testing"
+    "testing"
+    
+    "github.com/gogf/gf/container/gvar"
+    "github.com/gogf/gf/frame/g"
+    "github.com/gogf/gf/test/gtest"
+    "github.com/gogf/gf/util/gconv"
 )
 
 func TestVar_Struct(t *testing.T) {

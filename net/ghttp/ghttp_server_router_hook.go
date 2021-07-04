@@ -7,8 +7,9 @@
 package ghttp
 
 import (
-	"github.com/gogf/gf/debug/gdebug"
 	"net/http"
+
+	"github.com/gogf/gf/debug/gdebug"
 )
 
 // BindHookHandler registers handler for specified hook.

@@ -7,10 +7,11 @@
 package gfile
 
 import (
+	"time"
+
 	"github.com/gogf/gf/os/gcache"
 	"github.com/gogf/gf/os/gcmd"
 	"github.com/gogf/gf/os/gfsnotify"
-	"time"
 )
 
 const (

@@ -10,14 +10,15 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"github.com/gogf/gf/errors/gerror"
-	"github.com/gogf/gf/internal/intlog"
-	"github.com/gogf/gf/text/gstr"
 	"os"
 	"runtime"
 	"strings"
 	"sync"
 	"time"
+
+	"github.com/gogf/gf/errors/gerror"
+	"github.com/gogf/gf/internal/intlog"
+	"github.com/gogf/gf/text/gstr"
 
 	"github.com/gogf/gf/container/gtype"
 	"github.com/gogf/gf/encoding/gjson"

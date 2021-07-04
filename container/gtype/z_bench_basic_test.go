@@ -9,12 +9,13 @@
 package gtype_test
 
 import (
-	"github.com/gogf/gf/container/gtype"
-	"strconv"
-	"sync/atomic"
-	"testing"
-
-	"github.com/gogf/gf/encoding/gbinary"
+    "strconv"
+    "sync/atomic"
+    "testing"
+    
+    "github.com/gogf/gf/container/gtype"
+    
+    "github.com/gogf/gf/encoding/gbinary"
 )
 
 var (

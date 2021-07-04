@@ -7,10 +7,11 @@
 package utils_test
 
 import (
-	"github.com/gogf/gf/internal/utils"
-	"github.com/gogf/gf/test/gtest"
 	"io/ioutil"
 	"testing"
+
+	"github.com/gogf/gf/internal/utils"
+	"github.com/gogf/gf/test/gtest"
 )
 
 func Test_ReadCloser(t *testing.T) {

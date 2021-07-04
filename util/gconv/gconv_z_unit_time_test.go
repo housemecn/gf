@@ -7,10 +7,11 @@
 package gconv_test
 
 import (
-	"github.com/gogf/gf/container/gvar"
-	"github.com/gogf/gf/frame/g"
 	"testing"
 	"time"
+
+	"github.com/gogf/gf/container/gvar"
+	"github.com/gogf/gf/frame/g"
 
 	"github.com/gogf/gf/os/gtime"
 	"github.com/gogf/gf/test/gtest"

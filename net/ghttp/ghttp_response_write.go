@@ -9,8 +9,9 @@ package ghttp
 
 import (
 	"fmt"
-	"github.com/gogf/gf/internal/json"
 	"net/http"
+
+	"github.com/gogf/gf/internal/json"
 
 	"github.com/gogf/gf/encoding/gparser"
 	"github.com/gogf/gf/util/gconv"

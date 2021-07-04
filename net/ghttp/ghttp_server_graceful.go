@@ -10,14 +10,15 @@ import (
 	"context"
 	"crypto/tls"
 	"fmt"
-	"github.com/gogf/gf/errors/gerror"
-	"github.com/gogf/gf/os/gproc"
-	"github.com/gogf/gf/os/gres"
-	"github.com/gogf/gf/text/gstr"
 	"log"
 	"net"
 	"net/http"
 	"os"
+
+	"github.com/gogf/gf/errors/gerror"
+	"github.com/gogf/gf/os/gproc"
+	"github.com/gogf/gf/os/gres"
+	"github.com/gogf/gf/text/gstr"
 )
 
 // gracefulServer wraps the net/http.Server with graceful reload/restart feature.

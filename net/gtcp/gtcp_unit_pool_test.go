@@ -8,10 +8,11 @@ package gtcp_test
 
 import (
 	"fmt"
-	"github.com/gogf/gf/net/gtcp"
-	"github.com/gogf/gf/test/gtest"
 	"testing"
 	"time"
+
+	"github.com/gogf/gf/net/gtcp"
+	"github.com/gogf/gf/test/gtest"
 )
 
 func Test_Pool_Basic1(t *testing.T) {

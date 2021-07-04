@@ -7,10 +7,11 @@
 package genv_test
 
 import (
-	"github.com/gogf/gf/frame/g"
-	"github.com/gogf/gf/os/gcmd"
 	"os"
 	"testing"
+
+	"github.com/gogf/gf/frame/g"
+	"github.com/gogf/gf/os/gcmd"
 
 	"github.com/gogf/gf/os/genv"
 	"github.com/gogf/gf/os/gtime"

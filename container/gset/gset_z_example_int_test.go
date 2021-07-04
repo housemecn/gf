@@ -7,8 +7,9 @@
 package gset_test
 
 import (
-	"fmt"
-	"github.com/gogf/gf/container/gset"
+    "fmt"
+    
+    "github.com/gogf/gf/container/gset"
 )
 
 func ExampleIntSet_Contains() {

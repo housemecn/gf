@@ -7,9 +7,10 @@
 package gres_test
 
 import (
-	"github.com/gogf/gf/os/gtime"
 	"strings"
 	"testing"
+
+	"github.com/gogf/gf/os/gtime"
 
 	"github.com/gogf/gf/os/gfile"
 

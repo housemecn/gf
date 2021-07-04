@@ -8,10 +8,11 @@ package gsession_test
 
 import (
 	"context"
-	"github.com/gogf/gf/frame/g"
-	"github.com/gogf/gf/os/gsession"
 	"testing"
 	"time"
+
+	"github.com/gogf/gf/frame/g"
+	"github.com/gogf/gf/os/gsession"
 
 	"github.com/gogf/gf/test/gtest"
 )

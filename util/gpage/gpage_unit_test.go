@@ -9,8 +9,9 @@
 package gpage_test
 
 import (
-	"github.com/gogf/gf/util/gpage"
 	"testing"
+
+	"github.com/gogf/gf/util/gpage"
 
 	"github.com/gogf/gf/test/gtest"
 )

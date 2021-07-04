@@ -7,8 +7,9 @@
 package glog
 
 import (
-	"github.com/gogf/gf/errors/gerror"
 	"strings"
+
+	"github.com/gogf/gf/errors/gerror"
 )
 
 // Note that the LEVEL_PANI and LEVEL_FATA levels are not used for logging output,

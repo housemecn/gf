@@ -8,8 +8,9 @@ package ghttp
 
 import (
 	"bytes"
-	"github.com/gogf/gf/debug/gdebug"
 	"strings"
+
+	"github.com/gogf/gf/debug/gdebug"
 
 	"github.com/gogf/gf/text/gstr"
 )

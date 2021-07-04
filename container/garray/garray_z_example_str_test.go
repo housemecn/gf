@@ -7,9 +7,10 @@
 package garray_test
 
 import (
-	"fmt"
-	"github.com/gogf/gf/container/garray"
-	"github.com/gogf/gf/frame/g"
+    "fmt"
+    
+    "github.com/gogf/gf/container/garray"
+    "github.com/gogf/gf/frame/g"
 )
 
 func ExampleStrArray_Walk() {

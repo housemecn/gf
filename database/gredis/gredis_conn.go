@@ -8,14 +8,15 @@ package gredis
 
 import (
 	"context"
+	"reflect"
+	"time"
+
 	"github.com/gogf/gf/container/gvar"
 	"github.com/gogf/gf/errors/gerror"
 	"github.com/gogf/gf/internal/json"
 	"github.com/gogf/gf/os/gtime"
 	"github.com/gogf/gf/util/gconv"
 	"github.com/gomodule/redigo/redis"
-	"reflect"
-	"time"
 )
 
 // Do sends a command to the server and returns the received reply.

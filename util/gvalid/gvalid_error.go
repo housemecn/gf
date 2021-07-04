@@ -8,9 +8,10 @@ package gvalid
 
 import (
 	"errors"
+	"strings"
+
 	"github.com/gogf/gf/text/gregex"
 	"github.com/gogf/gf/text/gstr"
-	"strings"
 )
 
 // Error is the validation error for validation result.

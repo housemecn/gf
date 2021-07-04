@@ -7,8 +7,9 @@
 package structs
 
 import (
-	"github.com/gogf/gf/errors/gerror"
-	"reflect"
+    "reflect"
+    
+    "github.com/gogf/gf/errors/gerror"
 )
 
 // StructType retrieves and returns the struct Type of specified struct/*struct.

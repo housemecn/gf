@@ -9,13 +9,14 @@ package gbuild
 
 import (
 	"context"
+	"runtime"
+
 	"github.com/gogf/gf"
 	"github.com/gogf/gf/container/gvar"
 	"github.com/gogf/gf/encoding/gbase64"
 	"github.com/gogf/gf/internal/intlog"
 	"github.com/gogf/gf/internal/json"
 	"github.com/gogf/gf/util/gconv"
-	"runtime"
 )
 
 var (

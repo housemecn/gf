@@ -7,8 +7,9 @@
 package gtimer
 
 import (
-	"github.com/gogf/gf/container/gtype"
 	"math"
+
+	"github.com/gogf/gf/container/gtype"
 )
 
 // Entry is the timing job.

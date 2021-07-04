@@ -8,12 +8,13 @@ package ghttp_test
 
 import (
 	"fmt"
+	"testing"
+	"time"
+
 	"github.com/gogf/gf/debug/gdebug"
 	"github.com/gogf/gf/os/gfile"
 	"github.com/gogf/gf/os/gtime"
 	"github.com/gogf/gf/text/gstr"
-	"testing"
-	"time"
 
 	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/net/ghttp"

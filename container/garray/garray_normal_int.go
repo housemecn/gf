@@ -7,16 +7,17 @@
 package garray
 
 import (
-	"bytes"
-	"fmt"
-	"github.com/gogf/gf/errors/gerror"
-	"github.com/gogf/gf/internal/json"
-	"math"
-	"sort"
-
-	"github.com/gogf/gf/internal/rwmutex"
-	"github.com/gogf/gf/util/gconv"
-	"github.com/gogf/gf/util/grand"
+    "bytes"
+    "fmt"
+    "math"
+    "sort"
+    
+    "github.com/gogf/gf/errors/gerror"
+    "github.com/gogf/gf/internal/json"
+    
+    "github.com/gogf/gf/internal/rwmutex"
+    "github.com/gogf/gf/util/gconv"
+    "github.com/gogf/gf/util/grand"
 )
 
 // IntArray is a golang int array with rich features.

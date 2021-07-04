@@ -10,16 +10,17 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"io"
+	"os"
+	"strings"
+	"time"
+
 	"github.com/gogf/gf/container/gtype"
 	"github.com/gogf/gf/internal/intlog"
 	"github.com/gogf/gf/os/gfpool"
 	"github.com/gogf/gf/os/gmlock"
 	"github.com/gogf/gf/os/gtimer"
 	"go.opentelemetry.io/otel/trace"
-	"io"
-	"os"
-	"strings"
-	"time"
 
 	"github.com/gogf/gf/debug/gdebug"
 

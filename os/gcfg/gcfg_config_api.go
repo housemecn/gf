@@ -7,8 +7,9 @@
 package gcfg
 
 import (
-	"github.com/gogf/gf/errors/gerror"
 	"time"
+
+	"github.com/gogf/gf/errors/gerror"
 
 	"github.com/gogf/gf/encoding/gjson"
 

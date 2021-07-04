@@ -8,12 +8,13 @@ package gsession
 
 import (
 	"context"
+	"os"
+	"time"
+
 	"github.com/gogf/gf/container/gmap"
 	"github.com/gogf/gf/errors/gerror"
 	"github.com/gogf/gf/internal/intlog"
 	"github.com/gogf/gf/internal/json"
-	"os"
-	"time"
 
 	"github.com/gogf/gf/crypto/gaes"
 

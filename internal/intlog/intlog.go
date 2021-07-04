@@ -8,14 +8,15 @@
 package intlog
 
 import (
-	"bytes"
-	"context"
-	"fmt"
-	"github.com/gogf/gf/debug/gdebug"
-	"github.com/gogf/gf/internal/utils"
-	"go.opentelemetry.io/otel/trace"
-	"path/filepath"
-	"time"
+    "bytes"
+    "context"
+    "fmt"
+    "path/filepath"
+    "time"
+    
+    "github.com/gogf/gf/debug/gdebug"
+    "github.com/gogf/gf/internal/utils"
+    "go.opentelemetry.io/otel/trace"
 )
 
 const (

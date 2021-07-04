@@ -8,11 +8,11 @@ package glist
 
 import (
 	"container/list"
+	"testing"
+
 	"github.com/gogf/gf/internal/json"
 	"github.com/gogf/gf/test/gtest"
 	"github.com/gogf/gf/util/gconv"
-
-	"testing"
 )
 
 func checkListLen(t *gtest.T, l *List, len int) bool {

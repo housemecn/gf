@@ -11,10 +11,11 @@ import (
 	"bufio"
 	"bytes"
 	"fmt"
-	"github.com/gogf/gf/errors/gerror"
-	"github.com/gogf/gf/internal/json"
 	"io"
 	"strings"
+
+	"github.com/gogf/gf/errors/gerror"
+	"github.com/gogf/gf/internal/json"
 )
 
 // Decode converts INI format to map.

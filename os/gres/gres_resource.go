@@ -9,10 +9,11 @@ package gres
 import (
 	"context"
 	"fmt"
-	"github.com/gogf/gf/internal/intlog"
 	"os"
 	"path/filepath"
 	"strings"
+
+	"github.com/gogf/gf/internal/intlog"
 
 	"github.com/gogf/gf/os/gtime"
 

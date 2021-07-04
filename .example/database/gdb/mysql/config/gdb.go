@@ -1,9 +1,10 @@
 package main
 
 import (
-	"github.com/gogf/gf/database/gdb"
 	"sync"
 	"time"
+
+	"github.com/gogf/gf/database/gdb"
 )
 
 var db gdb.DB

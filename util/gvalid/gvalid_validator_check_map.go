@@ -7,8 +7,9 @@
 package gvalid
 
 import (
-	"github.com/gogf/gf/util/gconv"
 	"strings"
+
+	"github.com/gogf/gf/util/gconv"
 )
 
 // CheckMap validates map and returns the error result. It returns nil if with successful validation.

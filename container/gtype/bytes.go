@@ -7,10 +7,11 @@
 package gtype
 
 import (
-	"bytes"
-	"encoding/base64"
-	"github.com/gogf/gf/util/gconv"
-	"sync/atomic"
+    "bytes"
+    "encoding/base64"
+    "sync/atomic"
+    
+    "github.com/gogf/gf/util/gconv"
 )
 
 // Bytes is a struct for concurrent-safe operation for type []byte.

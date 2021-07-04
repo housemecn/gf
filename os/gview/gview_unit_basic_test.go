@@ -8,14 +8,15 @@ package gview_test
 
 import (
 	"context"
-	"github.com/gogf/gf/encoding/ghtml"
-	"github.com/gogf/gf/os/gtime"
-	"github.com/gogf/gf/util/gconv"
 	"io/ioutil"
 	"os"
 	"strings"
 	"testing"
 	"time"
+
+	"github.com/gogf/gf/encoding/ghtml"
+	"github.com/gogf/gf/os/gtime"
+	"github.com/gogf/gf/util/gconv"
 
 	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/os/gfile"

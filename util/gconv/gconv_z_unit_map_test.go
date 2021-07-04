@@ -7,8 +7,9 @@
 package gconv_test
 
 import (
-	"github.com/gogf/gf/util/gutil"
 	"testing"
+
+	"github.com/gogf/gf/util/gutil"
 
 	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/test/gtest"

@@ -9,8 +9,9 @@ package gerror_test
 import (
 	"errors"
 	"fmt"
-	"github.com/gogf/gf/internal/json"
 	"testing"
+
+	"github.com/gogf/gf/internal/json"
 
 	"github.com/gogf/gf/errors/gerror"
 	"github.com/gogf/gf/test/gtest"

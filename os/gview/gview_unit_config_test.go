@@ -8,11 +8,12 @@ package gview_test
 
 import (
 	"context"
+	"testing"
+
 	"github.com/gogf/gf/debug/gdebug"
 	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/os/gview"
 	"github.com/gogf/gf/test/gtest"
-	"testing"
 )
 
 func Test_Config(t *testing.T) {

@@ -9,9 +9,10 @@ package garray
 import (
 	"bytes"
 	"fmt"
-	"github.com/gogf/gf/internal/json"
 	"math"
 	"sort"
+
+	"github.com/gogf/gf/internal/json"
 
 	"github.com/gogf/gf/internal/rwmutex"
 	"github.com/gogf/gf/util/gconv"

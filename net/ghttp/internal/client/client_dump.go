@@ -8,10 +8,11 @@ package client
 
 import (
 	"fmt"
-	"github.com/gogf/gf/internal/utils"
 	"io/ioutil"
 	"net/http"
 	"net/http/httputil"
+
+	"github.com/gogf/gf/internal/utils"
 
 	"github.com/gogf/gf/util/gconv"
 )

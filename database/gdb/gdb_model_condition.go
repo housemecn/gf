@@ -8,9 +8,10 @@ package gdb
 
 import (
 	"fmt"
+	"strings"
+
 	"github.com/gogf/gf/text/gstr"
 	"github.com/gogf/gf/util/gconv"
-	"strings"
 )
 
 // Where sets the condition statement for the model. The parameter `where` can be type of

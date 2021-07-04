@@ -7,9 +7,10 @@
 package ghttp
 
 import (
-	"github.com/gogf/gf/os/gfile"
 	"strings"
 	"time"
+
+	"github.com/gogf/gf/os/gfile"
 
 	"github.com/gogf/gf/os/gproc"
 	"github.com/gogf/gf/os/gtimer"

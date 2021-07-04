@@ -9,9 +9,10 @@
 package gtype_test
 
 import (
-	"github.com/gogf/gf/container/gtype"
-	"github.com/gogf/gf/internal/json"
-	"testing"
+    "testing"
+    
+    "github.com/gogf/gf/container/gtype"
+    "github.com/gogf/gf/internal/json"
 )
 
 var (

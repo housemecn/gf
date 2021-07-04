@@ -9,9 +9,10 @@
 package grand_test
 
 import (
-	"github.com/gogf/gf/text/gstr"
 	"testing"
 	"time"
+
+	"github.com/gogf/gf/text/gstr"
 
 	"github.com/gogf/gf/test/gtest"
 	"github.com/gogf/gf/util/grand"

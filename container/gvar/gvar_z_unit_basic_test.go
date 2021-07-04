@@ -7,14 +7,15 @@
 package gvar_test
 
 import (
-	"bytes"
-	"encoding/binary"
-	"github.com/gogf/gf/util/gconv"
-	"testing"
-	"time"
-
-	"github.com/gogf/gf/container/gvar"
-	"github.com/gogf/gf/test/gtest"
+    "bytes"
+    "encoding/binary"
+    "testing"
+    "time"
+    
+    "github.com/gogf/gf/util/gconv"
+    
+    "github.com/gogf/gf/container/gvar"
+    "github.com/gogf/gf/test/gtest"
 )
 
 func Test_Set(t *testing.T) {

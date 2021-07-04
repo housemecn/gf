@@ -8,15 +8,16 @@ package ghttp
 
 import (
 	"context"
+	"io"
+	"mime/multipart"
+	"strconv"
+	"strings"
+
 	"github.com/gogf/gf/errors/gerror"
 	"github.com/gogf/gf/internal/intlog"
 	"github.com/gogf/gf/os/gfile"
 	"github.com/gogf/gf/os/gtime"
 	"github.com/gogf/gf/util/grand"
-	"io"
-	"mime/multipart"
-	"strconv"
-	"strings"
 )
 
 // UploadFile wraps the multipart uploading file with more and convenient features.

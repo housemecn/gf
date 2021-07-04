@@ -7,8 +7,9 @@
 package gjson
 
 import (
-	"github.com/gogf/gf/test/gtest"
 	"testing"
+
+	"github.com/gogf/gf/test/gtest"
 )
 
 func Test_checkDataType(t *testing.T) {
