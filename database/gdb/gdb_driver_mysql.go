@@ -10,14 +10,14 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
-	"net/url"
-
+	"github.com/gogf/gf/errors/gcode"
 	"github.com/gogf/gf/errors/gerror"
 	"github.com/gogf/gf/internal/intlog"
 	"github.com/gogf/gf/text/gregex"
 	"github.com/gogf/gf/text/gstr"
+	"net/url"
 
-	_ "github.com/gogf/mysql"
+	_ "github.com/go-sql-driver/mysql"
 )
 
 // DriverMysql is the driver for mysql database.
@@ -33,7 +33,7 @@ func (d *DriverMysql) New(core *Core, node *ConfigNode) (DB, error) {
 	}, nil
 }
 
-// Open creates and returns a underlying sql.DB object for mysql.
+// Open creates and returns an underlying sql.DB object for mysql.
 // Note that it converts time.Time argument to local timezone in default.
 func (d *DriverMysql) Open(config *ConfigNode) (*sql.DB, error) {
 	var source string
@@ -121,7 +121,7 @@ func (d *DriverMysql) TableFields(ctx context.Context, table string, schema ...s
 	charL, charR := d.GetChars()
 	table = gstr.Trim(table, charL+charR)
 	if gstr.Contains(table, " ") {
-		return nil, gerror.New("function TableFields supports only single table operations")
+		return nil, gerror.NewCode(gcode.CodeInvalidParameter, "function TableFields supports only single table operations")
 	}
 	useSchema := d.schema.Val()
 	if len(schema) > 0 && schema[0] != "" {

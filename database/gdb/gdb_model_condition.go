@@ -27,12 +27,12 @@ import (
 func (m *Model) Where(where interface{}, args ...interface{}) *Model {
 	model := m.getModel()
 	if model.whereHolder == nil {
-		model.whereHolder = make([]*whereHolder, 0)
+		model.whereHolder = make([]ModelWhereHolder, 0)
 	}
-	model.whereHolder = append(model.whereHolder, &whereHolder{
-		operator: whereHolderWhere,
-		where:    where,
-		args:     args,
+	model.whereHolder = append(model.whereHolder, ModelWhereHolder{
+		Operator: whereHolderOperatorWhere,
+		Where:    where,
+		Args:     args,
 	})
 	return model
 }
@@ -149,12 +149,12 @@ func (m *Model) WhereNotNull(columns ...string) *Model {
 func (m *Model) WhereOr(where interface{}, args ...interface{}) *Model {
 	model := m.getModel()
 	if model.whereHolder == nil {
-		model.whereHolder = make([]*whereHolder, 0)
+		model.whereHolder = make([]ModelWhereHolder, 0)
 	}
-	model.whereHolder = append(model.whereHolder, &whereHolder{
-		operator: whereHolderOr,
-		where:    where,
-		args:     args,
+	model.whereHolder = append(model.whereHolder, ModelWhereHolder{
+		Operator: whereHolderOperatorOr,
+		Where:    where,
+		Args:     args,
 	})
 	return model
 }
@@ -237,10 +237,13 @@ func (m *Model) WhereOrNotNull(columns ...string) *Model {
 }
 
 // Group sets the "GROUP BY" statement for the model.
-func (m *Model) Group(groupBy string) *Model {
-	model := m.getModel()
-	model.groupBy = m.db.GetCore().QuoteString(groupBy)
-	return model
+func (m *Model) Group(groupBy ...string) *Model {
+	if len(groupBy) > 0 {
+		model := m.getModel()
+		model.groupBy = m.db.GetCore().QuoteString(gstr.Join(groupBy, ","))
+		return model
+	}
+	return m
 }
 
 // And adds "AND" condition to the where statement.
@@ -248,12 +251,12 @@ func (m *Model) Group(groupBy string) *Model {
 func (m *Model) And(where interface{}, args ...interface{}) *Model {
 	model := m.getModel()
 	if model.whereHolder == nil {
-		model.whereHolder = make([]*whereHolder, 0)
+		model.whereHolder = make([]ModelWhereHolder, 0)
 	}
-	model.whereHolder = append(model.whereHolder, &whereHolder{
-		operator: whereHolderAnd,
-		where:    where,
-		args:     args,
+	model.whereHolder = append(model.whereHolder, ModelWhereHolder{
+		Operator: whereHolderOperatorAnd,
+		Where:    where,
+		Args:     args,
 	})
 	return model
 }
@@ -382,12 +385,17 @@ func (m *Model) ForPage(page, limit int) *Model {
 func (m *Model) formatCondition(limit1 bool, isCountStatement bool) (conditionWhere string, conditionExtra string, conditionArgs []interface{}) {
 	if len(m.whereHolder) > 0 {
 		for _, v := range m.whereHolder {
-			switch v.operator {
-			case whereHolderWhere:
+			switch v.Operator {
+			case whereHolderOperatorWhere:
 				if conditionWhere == "" {
-					newWhere, newArgs := formatWhere(
-						m.db, v.where, v.args, m.option&OptionOmitEmpty > 0, m.schema, m.tables,
-					)
+					newWhere, newArgs := formatWhere(m.db, formatWhereInput{
+						Where:     v.Where,
+						Args:      v.Args,
+						OmitNil:   m.option&optionOmitNilWhere > 0,
+						OmitEmpty: m.option&optionOmitEmptyWhere > 0,
+						Schema:    m.schema,
+						Table:     m.tables,
+					})
 					if len(newWhere) > 0 {
 						conditionWhere = newWhere
 						conditionArgs = newArgs
@@ -396,10 +404,15 @@ func (m *Model) formatCondition(limit1 bool, isCountStatement bool) (conditionWh
 				}
 				fallthrough
 
-			case whereHolderAnd:
-				newWhere, newArgs := formatWhere(
-					m.db, v.where, v.args, m.option&OptionOmitEmpty > 0, m.schema, m.tables,
-				)
+			case whereHolderOperatorAnd:
+				newWhere, newArgs := formatWhere(m.db, formatWhereInput{
+					Where:     v.Where,
+					Args:      v.Args,
+					OmitNil:   m.option&optionOmitNilWhere > 0,
+					OmitEmpty: m.option&optionOmitEmptyWhere > 0,
+					Schema:    m.schema,
+					Table:     m.tables,
+				})
 				if len(newWhere) > 0 {
 					if len(conditionWhere) == 0 {
 						conditionWhere = newWhere
@@ -411,10 +424,15 @@ func (m *Model) formatCondition(limit1 bool, isCountStatement bool) (conditionWh
 					conditionArgs = append(conditionArgs, newArgs...)
 				}
 
-			case whereHolderOr:
-				newWhere, newArgs := formatWhere(
-					m.db, v.where, v.args, m.option&OptionOmitEmpty > 0, m.schema, m.tables,
-				)
+			case whereHolderOperatorOr:
+				newWhere, newArgs := formatWhere(m.db, formatWhereInput{
+					Where:     v.Where,
+					Args:      v.Args,
+					OmitNil:   m.option&optionOmitNilWhere > 0,
+					OmitEmpty: m.option&optionOmitEmptyWhere > 0,
+					Schema:    m.schema,
+					Table:     m.tables,
+				})
 				if len(newWhere) > 0 {
 					if len(conditionWhere) == 0 {
 						conditionWhere = newWhere
@@ -454,9 +472,14 @@ func (m *Model) formatCondition(limit1 bool, isCountStatement bool) (conditionWh
 	}
 	// HAVING.
 	if len(m.having) > 0 {
-		havingStr, havingArgs := formatWhere(
-			m.db, m.having[0], gconv.Interfaces(m.having[1]), m.option&OptionOmitEmpty > 0, m.schema, m.tables,
-		)
+		havingStr, havingArgs := formatWhere(m.db, formatWhereInput{
+			Where:     m.having[0],
+			Args:      gconv.Interfaces(m.having[1]),
+			OmitNil:   m.option&optionOmitNilWhere > 0,
+			OmitEmpty: m.option&optionOmitEmptyWhere > 0,
+			Schema:    m.schema,
+			Table:     m.tables,
+		})
 		if len(havingStr) > 0 {
 			conditionExtra += " HAVING " + havingStr
 			conditionArgs = append(conditionArgs, havingArgs...)

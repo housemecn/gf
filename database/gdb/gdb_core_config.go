@@ -8,12 +8,11 @@ package gdb
 
 import (
 	"fmt"
+	"github.com/gogf/gf/os/glog"
 	"sync"
 	"time"
 
 	"github.com/gogf/gf/os/gcache"
-
-	"github.com/gogf/gf/os/glog"
 )
 
 // Config is the configuration management object.
@@ -139,7 +138,7 @@ func (c *Core) SetLogger(logger *glog.Logger) {
 	c.logger = logger
 }
 
-// GetLogger returns the logger of the orm.
+// GetLogger returns the (logger) of the orm.
 func (c *Core) GetLogger() *glog.Logger {
 	return c.logger
 }

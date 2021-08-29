@@ -7,6 +7,7 @@
 package ghttp
 
 import (
+	"github.com/gogf/gf/errors/gcode"
 	"github.com/gogf/gf/errors/gerror"
 	"github.com/gogf/gf/net/ghttp/internal/httputil"
 )
@@ -26,6 +27,7 @@ func niceCallFunc(f func()) {
 			switch exception {
 			case exceptionExit, exceptionExitAll:
 				return
+
 			default:
 				if _, ok := exception.(errorStack); ok {
 					// It's already an error that has stack info.
@@ -35,9 +37,13 @@ func niceCallFunc(f func()) {
 					// Note that there's a skip pointing the start stacktrace
 					// of the real error point.
 					if err, ok := exception.(error); ok {
-						panic(gerror.Wrap(err, ""))
+						if gerror.Code(err) != gcode.CodeNil {
+							panic(err)
+						} else {
+							panic(gerror.WrapCodeSkip(gcode.CodeInternalError, 1, err, ""))
+						}
 					} else {
-						panic(gerror.NewSkipf(1, "%v", exception))
+						panic(gerror.NewCodeSkipf(gcode.CodeInternalError, 1, "%+v", exception))
 					}
 				}
 			}

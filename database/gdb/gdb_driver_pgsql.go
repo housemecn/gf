@@ -15,6 +15,7 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
+	"github.com/gogf/gf/errors/gcode"
 	"strings"
 
 	"github.com/gogf/gf/errors/gerror"
@@ -126,7 +127,7 @@ func (d *DriverPgsql) TableFields(ctx context.Context, table string, schema ...s
 	charL, charR := d.GetChars()
 	table = gstr.Trim(table, charL+charR)
 	if gstr.Contains(table, " ") {
-		return nil, gerror.New("function TableFields supports only single table operations")
+		return nil, gerror.NewCode(gcode.CodeInvalidParameter, "function TableFields supports only single table operations")
 	}
 	table, _ = gregex.ReplaceString("\"", "", table)
 	useSchema := d.db.GetSchema()
@@ -142,9 +143,18 @@ func (d *DriverPgsql) TableFields(ctx context.Context, table string, schema ...s
 			result       Result
 			link, err    = d.SlaveLink(useSchema)
 			structureSql = fmt.Sprintf(`
-SELECT a.attname AS field, t.typname AS type FROM pg_class c, pg_attribute a
-LEFT OUTER JOIN pg_description b ON a.attrelid=b.objoid AND a.attnum = b.objsubid,pg_type t
-WHERE c.relname = '%s' and a.attnum > 0 and a.attrelid = c.oid and a.atttypid = t.oid
+SELECT a.attname AS field, t.typname AS type,a.attnotnull as null,
+    (case when d.contype is not null then 'pri' else '' end)  as key
+      ,ic.column_default as default_value,b.description as comment
+      ,coalesce(character_maximum_length, numeric_precision, -1) as length
+      ,numeric_scale as scale
+FROM pg_attribute a
+         left join pg_class c on a.attrelid = c.oid
+         left join pg_constraint d on d.conrelid = c.oid and a.attnum = d.conkey[1]
+         left join pg_description b ON a.attrelid=b.objoid AND a.attnum = b.objsubid
+         left join  pg_type t ON  a.atttypid = t.oid
+         left join information_schema.columns ic on ic.column_name = a.attname and ic.table_name = c.relname
+WHERE c.relname = '%s' and a.attnum > 0
 ORDER BY a.attnum`,
 				strings.ToLower(table),
 			)
@@ -160,9 +170,13 @@ ORDER BY a.attnum`,
 		fields = make(map[string]*TableField)
 		for i, m := range result {
 			fields[m["field"].String()] = &TableField{
-				Index: i,
-				Name:  m["field"].String(),
-				Type:  m["type"].String(),
+				Index:   i,
+				Name:    m["field"].String(),
+				Type:    m["type"].String(),
+				Null:    m["null"].Bool(),
+				Key:     m["key"].String(),
+				Default: m["default_value"].Val(),
+				Comment: m["comment"].String(),
 			}
 		}
 		return fields
@@ -171,4 +185,18 @@ ORDER BY a.attnum`,
 		fields = v.(map[string]*TableField)
 	}
 	return
+}
+
+// DoInsert is not supported in pgsql.
+func (d *DriverPgsql) DoInsert(ctx context.Context, link Link, table string, list List, option DoInsertOption) (result sql.Result, err error) {
+	switch option.InsertOption {
+	case insertOptionSave:
+		return nil, gerror.NewCode(gcode.CodeNotSupported, `Save operation is not supported by pgsql driver`)
+
+	case insertOptionReplace:
+		return nil, gerror.NewCode(gcode.CodeNotSupported, `Replace operation is not supported by pgsql driver`)
+
+	default:
+		return d.Core.DoInsert(ctx, link, table, list, option)
+	}
 }

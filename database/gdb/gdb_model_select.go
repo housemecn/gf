@@ -8,6 +8,7 @@ package gdb
 
 import (
 	"fmt"
+	"github.com/gogf/gf/errors/gcode"
 	"github.com/gogf/gf/errors/gerror"
 	"reflect"
 
@@ -76,7 +77,7 @@ func (m *Model) getFieldsFiltered() string {
 			panic("function FieldsEx supports only single table operations")
 		}
 		// Filter table fields with fieldEx.
-		tableFields, err := m.TableFields(m.tables)
+		tableFields, err := m.TableFields(m.tablesInit)
 		if err != nil {
 			panic(err)
 		}
@@ -101,27 +102,27 @@ func (m *Model) getFieldsFiltered() string {
 	return newFields
 }
 
-// Chunk iterates the query result with given size and callback function.
-func (m *Model) Chunk(limit int, callback func(result Result, err error) bool) {
+// Chunk iterates the query result with given `size` and `handler` function.
+func (m *Model) Chunk(size int, handler ChunkHandler) {
 	page := m.start
 	if page <= 0 {
 		page = 1
 	}
 	model := m
 	for {
-		model = model.Page(page, limit)
+		model = model.Page(page, size)
 		data, err := model.All()
 		if err != nil {
-			callback(nil, err)
+			handler(nil, err)
 			break
 		}
 		if len(data) == 0 {
 			break
 		}
-		if callback(data, err) == false {
+		if handler(data, err) == false {
 			break
 		}
-		if len(data) < limit {
+		if len(data) < size {
 			break
 		}
 		page++
@@ -316,7 +317,7 @@ func (m *Model) Scan(pointer interface{}, where ...interface{}) error {
 
 	reflectKind = reflectValue.Kind()
 	if reflectKind != reflect.Ptr {
-		return gerror.New(`the parameter "pointer" for function Scan should type of pointer`)
+		return gerror.NewCode(gcode.CodeInvalidParameter, `the parameter "pointer" for function Scan should type of pointer`)
 	}
 	for reflectKind == reflect.Ptr {
 		reflectValue = reflectValue.Elem()
@@ -331,7 +332,10 @@ func (m *Model) Scan(pointer interface{}, where ...interface{}) error {
 		return m.doStruct(pointer, where...)
 
 	default:
-		return gerror.New(`element of parameter "pointer" for function Scan should type of struct/*struct/[]struct/[]*struct`)
+		return gerror.NewCode(
+			gcode.CodeInvalidParameter,
+			`element of parameter "pointer" for function Scan should type of struct/*struct/[]struct/[]*struct`,
+		)
 	}
 }
 
@@ -358,11 +362,11 @@ func (m *Model) Scan(pointer interface{}, where ...interface{}) error {
 // parameter.
 // See the example or unit testing cases for clear understanding for this function.
 func (m *Model) ScanList(listPointer interface{}, attributeName string, relation ...string) (err error) {
-	all, err := m.All()
+	result, err := m.All()
 	if err != nil {
 		return err
 	}
-	return all.ScanList(listPointer, attributeName, relation...)
+	return doScanList(m, result, listPointer, attributeName, relation...)
 }
 
 // Count does "SELECT COUNT(x) FROM ..." statement for the model.
@@ -549,6 +553,10 @@ func (m *Model) doGetAllBySql(sql string, args ...interface{}) (result Result, e
 				intlog.Error(m.GetCtx(), err)
 			}
 		} else {
+			// In case of Cache Penetration.
+			if result == nil {
+				result = Result{}
+			}
 			if err := cacheObj.Set(cacheKey, result, m.cacheDuration); err != nil {
 				intlog.Error(m.GetCtx(), err)
 			}

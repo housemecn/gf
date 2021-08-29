@@ -21,6 +21,7 @@ package gcharset
 
 import (
 	"bytes"
+	"github.com/gogf/gf/errors/gcode"
 	"github.com/gogf/gf/errors/gerror"
 	"io/ioutil"
 
@@ -59,11 +60,11 @@ func Convert(dstCharset string, srcCharset string, src string) (dst string, err 
 				transform.NewReader(bytes.NewReader([]byte(src)), e.NewDecoder()),
 			)
 			if err != nil {
-				return "", gerror.Newf("%s to utf8 failed. %v", srcCharset, err)
+				return "", gerror.WrapCodef(gcode.CodeInternalError, err, "%s to utf8 failed", srcCharset)
 			}
 			src = string(tmp)
 		} else {
-			return dst, gerror.Newf("unsupport srcCharset: %s", srcCharset)
+			return dst, gerror.NewCodef(gcode.CodeInvalidParameter, "unsupported srcCharset: %s", srcCharset)
 		}
 	}
 	// Do the converting from UTF-8 to <dstCharset>.
@@ -73,11 +74,11 @@ func Convert(dstCharset string, srcCharset string, src string) (dst string, err 
 				transform.NewReader(bytes.NewReader([]byte(src)), e.NewEncoder()),
 			)
 			if err != nil {
-				return "", gerror.Newf("utf to %s failed. %v", dstCharset, err)
+				return "", gerror.WrapCodef(gcode.CodeInternalError, err, "utf to %s failed", dstCharset)
 			}
 			dst = string(tmp)
 		} else {
-			return dst, gerror.Newf("unsupport dstCharset: %s", dstCharset)
+			return dst, gerror.NewCodef(gcode.CodeInvalidParameter, "unsupported dstCharset: %s", dstCharset)
 		}
 	} else {
 		dst = src

@@ -37,6 +37,7 @@ type Request struct {
 	StaticFile      *staticFile            // Static file object for static file serving.
 	context         context.Context        // Custom context for internal usage purpose.
 	handlers        []*handlerParsedItem   // All matched handlers containing handler, hook and middleware for this request.
+	handlerResponse handlerResponse        // Handler response object and its error value.
 	hasHookHandler  bool                   // A bool marking whether there's hook handler in the handlers for performance purpose.
 	hasServeHandler bool                   // A bool marking whether there's serving handler in the handlers for performance purpose.
 	parsedQuery     bool                   // A bool marking whether the GET parameters parsed.
@@ -55,6 +56,11 @@ type Request struct {
 	isFileRequest   bool                   // A bool marking whether current request is file serving.
 	viewObject      *gview.View            // Custom template view engine object for this response.
 	viewParams      gview.Params           // Custom template view variables for this response.
+}
+
+type handlerResponse struct {
+	Object interface{}
+	Error  error
 }
 
 // staticFile is the file struct for static file service.
@@ -235,4 +241,9 @@ func (r *Request) ReloadParam() {
 	r.parsedForm = false
 	r.parsedQuery = false
 	r.bodyContent = nil
+}
+
+// GetHandlerResponse retrieves and returns the handler response object and its error.
+func (r *Request) GetHandlerResponse() (res interface{}, err error) {
+	return r.handlerResponse.Object, r.handlerResponse.Error
 }

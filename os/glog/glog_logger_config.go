@@ -7,6 +7,8 @@
 package glog
 
 import (
+	"github.com/gogf/gf/errors/gcode"
+	"github.com/gogf/gf/os/gctx"
 	"io"
 	"strings"
 	"time"
@@ -24,10 +26,10 @@ type Config struct {
 	Writer               io.Writer      `json:"-"`                    // Customized io.Writer.
 	Flags                int            `json:"flags"`                // Extra flags for logging output features.
 	Path                 string         `json:"path"`                 // Logging directory path.
-	File                 string         `json:"file"`                 // Format for logging file.
+	File                 string         `json:"file"`                 // Format pattern for logging file.
 	Level                int            `json:"level"`                // Output level.
 	Prefix               string         `json:"prefix"`               // Prefix string for every logging content.
-	StSkip               int            `json:"stSkip"`               // Skip count for stack.
+	StSkip               int            `json:"stSkip"`               // Skipping count for stack.
 	StStatus             int            `json:"stStatus"`             // Stack status(1: enabled - default; 0: disabled)
 	StFilter             string         `json:"stFilter"`             // Stack string filter.
 	CtxKeys              []interface{}  `json:"ctxKeys"`              // Context keys for logging, which is used for value retrieving from context.
@@ -39,7 +41,8 @@ type Config struct {
 	RotateBackupLimit    int            `json:"rotateBackupLimit"`    // Max backup for rotated files, default is 0, means no backups.
 	RotateBackupExpire   time.Duration  `json:"rotateBackupExpire"`   // Max expire for rotated files, which is 0 in default, means no expiration.
 	RotateBackupCompress int            `json:"rotateBackupCompress"` // Compress level for rotated files using gzip algorithm. It's 0 in default, means no compression.
-	RotateCheckInterval  time.Duration  `json:"rotateCheckInterval"`  // Asynchronous checks the backups and expiration at intervals. It's 1 hour in default.
+	RotateCheckInterval  time.Duration  `json:"rotateCheckInterval"`  // Asynchronously checks the backups and expiration at intervals. It's 1 hour in default.
+	WriterColorEnable    bool           `json:"writerColorEnable"`    // Logging level prefix with color to writer or not (false in default).
 }
 
 // DefaultConfig returns the default configuration for logger.
@@ -48,6 +51,7 @@ func DefaultConfig() Config {
 		File:                defaultFileFormat,
 		Flags:               F_TIME_STD,
 		Level:               LEVEL_ALL,
+		CtxKeys:             []interface{}{gctx.CtxKey},
 		StStatus:            1,
 		HeaderPrint:         true,
 		StdoutPrint:         true,
@@ -80,7 +84,7 @@ func (l *Logger) SetConfig(config Config) error {
 // SetConfigWithMap set configurations with map for the logger.
 func (l *Logger) SetConfigWithMap(m map[string]interface{}) error {
 	if m == nil || len(m) == 0 {
-		return gerror.New("configuration cannot be empty")
+		return gerror.NewCode(gcode.CodeInvalidParameter, "configuration cannot be empty")
 	}
 	// The m now is a shallow copy of m.
 	// A little tricky, isn't it?
@@ -91,7 +95,7 @@ func (l *Logger) SetConfigWithMap(m map[string]interface{}) error {
 		if level, ok := levelStringMap[strings.ToUpper(gconv.String(levelValue))]; ok {
 			m[levelKey] = level
 		} else {
-			return gerror.Newf(`invalid level string: %v`, levelValue)
+			return gerror.NewCodef(gcode.CodeInvalidParameter, `invalid level string: %v`, levelValue)
 		}
 	}
 	// Change string configuration to int value for file rotation size.
@@ -99,7 +103,7 @@ func (l *Logger) SetConfigWithMap(m map[string]interface{}) error {
 	if rotateSizeValue != nil {
 		m[rotateSizeKey] = gfile.StrToSize(gconv.String(rotateSizeValue))
 		if m[rotateSizeKey] == -1 {
-			return gerror.Newf(`invalid rotate size: %v`, rotateSizeValue)
+			return gerror.NewCodef(gcode.CodeInvalidConfiguration, `invalid rotate size: %v`, rotateSizeValue)
 		}
 	}
 	if err := gconv.Struct(m, &l.config); err != nil {
@@ -162,6 +166,7 @@ func (l *Logger) SetStackFilter(filter string) {
 // Note that multiple calls of this function will overwrite the previous set context keys.
 func (l *Logger) SetCtxKeys(keys ...interface{}) {
 	l.config.CtxKeys = keys
+	l.config.CtxKeys = append(l.config.CtxKeys, gctx.CtxKey)
 }
 
 // AppendCtxKeys appends extra keys to logger.
@@ -187,9 +192,9 @@ func (l *Logger) GetCtxKeys() []interface{} {
 	return l.config.CtxKeys
 }
 
-// SetWriter sets the customized logging <writer> for logging.
-// The <writer> object should implements the io.Writer interface.
-// Developer can use customized logging <writer> to redirect logging output to another service,
+// SetWriter sets the customized logging `writer` for logging.
+// The `writer` object should implements the io.Writer interface.
+// Developer can use customized logging `writer` to redirect logging output to another service,
 // eg: kafka, mysql, mongodb, etc.
 func (l *Logger) SetWriter(writer io.Writer) {
 	l.config.Writer = writer
@@ -204,12 +209,11 @@ func (l *Logger) GetWriter() io.Writer {
 // SetPath sets the directory path for file logging.
 func (l *Logger) SetPath(path string) error {
 	if path == "" {
-		return gerror.New("logging path is empty")
+		return gerror.NewCode(gcode.CodeInvalidParameter, "logging path is empty")
 	}
 	if !gfile.Exists(path) {
 		if err := gfile.Mkdir(path); err != nil {
-			//fmt.Fprintln(os.Stderr, fmt.Sprintf(`[glog] mkdir "%s" failed: %s`, path, err.Error()))
-			return gerror.Wrapf(err, `Mkdir "%s" failed in PWD "%s"`, path, gfile.Pwd())
+			return gerror.WrapCodef(gcode.CodeOperationFailed, err, `Mkdir "%s" failed in PWD "%s"`, path, gfile.Pwd())
 		}
 	}
 	l.config.Path = strings.TrimRight(path, gfile.Separator)
@@ -222,8 +226,8 @@ func (l *Logger) GetPath() string {
 	return l.config.Path
 }
 
-// SetFile sets the file name <pattern> for file logging.
-// Datetime pattern can be used in <pattern>, eg: access-{Ymd}.log.
+// SetFile sets the file name `pattern` for file logging.
+// Datetime pattern can be used in `pattern`, eg: access-{Ymd}.log.
 // The default file name pattern is: Y-m-d.log, eg: 2018-01-01.log
 func (l *Logger) SetFile(pattern string) {
 	l.config.File = pattern
@@ -248,4 +252,9 @@ func (l *Logger) SetPrefix(prefix string) {
 // SetHandlers sets the logging handlers for current logger.
 func (l *Logger) SetHandlers(handlers ...Handler) {
 	l.config.Handlers = handlers
+}
+
+//SetWriterColorEnable sets the file logging with color
+func (l *Logger) SetWriterColorEnable(enabled bool) {
+	l.config.WriterColorEnable = enabled
 }

@@ -10,6 +10,7 @@ package gdb
 import (
 	"context"
 	"database/sql"
+	"github.com/gogf/gf/errors/gcode"
 	"github.com/gogf/gf/errors/gerror"
 
 	"github.com/gogf/gf/os/gtime"
@@ -26,10 +27,15 @@ func (c *Core) Query(sql string, args ...interface{}) (rows *sql.Rows, err error
 func (c *Core) DoQuery(ctx context.Context, link Link, sql string, args ...interface{}) (rows *sql.Rows, err error) {
 	// Transaction checks.
 	if link == nil {
-		if link, err = c.SlaveLink(); err != nil {
+		if tx := TXFromCtx(ctx, c.db.GetGroup()); tx != nil {
+			// Firstly, check and retrieve transaction link from context.
+			link = &txLink{tx.tx}
+		} else if link, err = c.SlaveLink(); err != nil {
+			// Or else it creates one from master node.
 			return nil, err
 		}
 	} else if !link.IsTransaction() {
+		// If current link is not transaction link, it checks and retrieves transaction from context.
 		if tx := TXFromCtx(ctx, c.db.GetGroup()); tx != nil {
 			link = &txLink{tx.tx}
 		}
@@ -83,10 +89,15 @@ func (c *Core) Exec(sql string, args ...interface{}) (result sql.Result, err err
 func (c *Core) DoExec(ctx context.Context, link Link, sql string, args ...interface{}) (result sql.Result, err error) {
 	// Transaction checks.
 	if link == nil {
-		if link, err = c.MasterLink(); err != nil {
+		if tx := TXFromCtx(ctx, c.db.GetGroup()); tx != nil {
+			// Firstly, check and retrieve transaction link from context.
+			link = &txLink{tx.tx}
+		} else if link, err = c.MasterLink(); err != nil {
+			// Or else it creates one from master node.
 			return nil, err
 		}
 	} else if !link.IsTransaction() {
+		// If current link is not transaction link, it checks and retrieves transaction from context.
 		if tx := TXFromCtx(ctx, c.db.GetGroup()); tx != nil {
 			link = &txLink{tx.tx}
 		}
@@ -136,7 +147,7 @@ func (c *Core) DoExec(ctx context.Context, link Link, sql string, args ...interf
 func (c *Core) DoCommit(ctx context.Context, link Link, sql string, args []interface{}) (newSql string, newArgs []interface{}, err error) {
 	if c.db.GetConfig().CtxStrict {
 		if v := ctx.Value(ctxStrictKeyName); v == nil {
-			return sql, args, gerror.New(ctxStrictErrorStr)
+			return sql, args, gerror.NewCode(gcode.CodeMissingParameter, ctxStrictErrorStr)
 		}
 	}
 	return sql, args, nil
@@ -169,11 +180,25 @@ func (c *Core) Prepare(sql string, execOnMaster ...bool) (*Stmt, error) {
 
 // DoPrepare calls prepare function on given link object and returns the statement object.
 func (c *Core) DoPrepare(ctx context.Context, link Link, sql string) (*Stmt, error) {
-	if link != nil && !link.IsTransaction() {
+	// Transaction checks.
+	if link == nil {
+		if tx := TXFromCtx(ctx, c.db.GetGroup()); tx != nil {
+			// Firstly, check and retrieve transaction link from context.
+			link = &txLink{tx.tx}
+		} else {
+			// Or else it creates one from master node.
+			var err error
+			if link, err = c.MasterLink(); err != nil {
+				return nil, err
+			}
+		}
+	} else if !link.IsTransaction() {
+		// If current link is not transaction link, it checks and retrieves transaction from context.
 		if tx := TXFromCtx(ctx, c.db.GetGroup()); tx != nil {
 			link = &txLink{tx.tx}
 		}
 	}
+
 	if c.GetConfig().PrepareTimeout > 0 {
 		// DO NOT USE cancel function in prepare statement.
 		ctx, _ = context.WithTimeout(ctx, c.GetConfig().PrepareTimeout)
@@ -181,7 +206,7 @@ func (c *Core) DoPrepare(ctx context.Context, link Link, sql string) (*Stmt, err
 
 	if c.db.GetConfig().CtxStrict {
 		if v := ctx.Value(ctxStrictKeyName); v == nil {
-			return nil, gerror.New(ctxStrictErrorStr)
+			return nil, gerror.NewCode(gcode.CodeMissingParameter, ctxStrictErrorStr)
 		}
 	}
 

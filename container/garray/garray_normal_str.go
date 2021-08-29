@@ -8,6 +8,7 @@ package garray
 
 import (
 	"bytes"
+	"github.com/gogf/gf/errors/gcode"
 	"github.com/gogf/gf/errors/gerror"
 	"github.com/gogf/gf/internal/json"
 	"github.com/gogf/gf/text/gstr"
@@ -90,7 +91,7 @@ func (a *StrArray) Set(index int, value string) error {
 	a.mu.Lock()
 	defer a.mu.Unlock()
 	if index < 0 || index >= len(a.array) {
-		return gerror.Newf("index %d out of array range %d", index, len(a.array))
+		return gerror.NewCodef(gcode.CodeInvalidParameter, "index %d out of array range %d", index, len(a.array))
 	}
 	a.array[index] = value
 	return nil
@@ -136,10 +137,7 @@ func (a *StrArray) Sort(reverse ...bool) *StrArray {
 	defer a.mu.Unlock()
 	if len(reverse) > 0 && reverse[0] {
 		sort.Slice(a.array, func(i, j int) bool {
-			if strings.Compare(a.array[i], a.array[j]) < 0 {
-				return false
-			}
-			return true
+			return strings.Compare(a.array[i], a.array[j]) >= 0
 		})
 	} else {
 		sort.Strings(a.array)
@@ -162,7 +160,7 @@ func (a *StrArray) InsertBefore(index int, value string) error {
 	a.mu.Lock()
 	defer a.mu.Unlock()
 	if index < 0 || index >= len(a.array) {
-		return gerror.Newf("index %d out of array range %d", index, len(a.array))
+		return gerror.NewCodef(gcode.CodeInvalidParameter, "index %d out of array range %d", index, len(a.array))
 	}
 	rear := append([]string{}, a.array[index:]...)
 	a.array = append(a.array[0:index], value)
@@ -175,7 +173,7 @@ func (a *StrArray) InsertAfter(index int, value string) error {
 	a.mu.Lock()
 	defer a.mu.Unlock()
 	if index < 0 || index >= len(a.array) {
-		return gerror.Newf("index %d out of array range %d", index, len(a.array))
+		return gerror.NewCodef(gcode.CodeInvalidParameter, "index %d out of array range %d", index, len(a.array))
 	}
 	rear := append([]string{}, a.array[index+1:]...)
 	a.array = append(a.array[0:index+1], value)
@@ -414,7 +412,7 @@ func (a *StrArray) SubSlice(offset int, length ...int) []string {
 	}
 }
 
-// See PushRight.
+// Append is alias of PushRight,please See PushRight.
 func (a *StrArray) Append(value ...string) *StrArray {
 	a.mu.Lock()
 	a.array = append(a.array, value...)
@@ -562,7 +560,7 @@ func (a *StrArray) Fill(startIndex int, num int, value string) error {
 	a.mu.Lock()
 	defer a.mu.Unlock()
 	if startIndex < 0 || startIndex > len(a.array) {
-		return gerror.Newf("index %d out of array range %d", startIndex, len(a.array))
+		return gerror.NewCodef(gcode.CodeInvalidParameter, "index %d out of array range %d", startIndex, len(a.array))
 	}
 	for i := startIndex; i < startIndex+num; i++ {
 		if i > len(a.array)-1 {

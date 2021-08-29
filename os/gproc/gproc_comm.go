@@ -9,6 +9,7 @@ package gproc
 import (
 	"fmt"
 	"github.com/gogf/gf/container/gmap"
+	"github.com/gogf/gf/errors/gcode"
 	"github.com/gogf/gf/errors/gerror"
 	"github.com/gogf/gf/net/gtcp"
 	"github.com/gogf/gf/os/gfile"
@@ -31,9 +32,9 @@ type MsgResponse struct {
 }
 
 const (
-	gPROC_COMM_DEFAULT_GRUOP_NAME = ""    // Default group name.
-	gPROC_DEFAULT_TCP_PORT        = 10000 // Starting port number for receiver listening.
-	gPROC_MSG_QUEUE_MAX_LENGTH    = 10000 // Max size for each message queue of the group.
+	defaultGroupNameFoProcComm = ""    // Default group name.
+	defaultTcpPortForProcComm  = 10000 // Starting port number for receiver listening.
+	maxLengthForProcMsgQueue   = 10000 // Max size for each message queue of the group.
 )
 
 var (
@@ -65,7 +66,7 @@ func getConnByPid(pid int) (*gtcp.PoolConn, error) {
 			return nil, err
 		}
 	}
-	return nil, gerror.Newf("could not find port for pid: %d", pid)
+	return nil, gerror.NewCodef(gcode.CodeOperationFailed, "could not find port for pid: %d", pid)
 }
 
 // getPortByPid returns the listening port for specified pid.

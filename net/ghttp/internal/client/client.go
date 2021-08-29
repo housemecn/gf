@@ -12,6 +12,7 @@ import (
 	"crypto/tls"
 	"fmt"
 	"github.com/gogf/gf"
+	"github.com/gogf/gf/errors/gcode"
 	"github.com/gogf/gf/errors/gerror"
 	"github.com/gogf/gf/os/gfile"
 	"github.com/gogf/gf/text/gstr"
@@ -154,7 +155,7 @@ func (c *Client) SetPrefix(prefix string) *Client {
 	return c
 }
 
-// SetTimeOut sets the request timeout for the client.
+// SetTimeout sets the request timeout for the client.
 func (c *Client) SetTimeout(t time.Duration) *Client {
 	c.Client.Timeout = t
 	return c
@@ -242,27 +243,27 @@ func (c *Client) SetProxy(proxyURL string) {
 	}
 }
 
-// SetTlsKeyCrt sets the certificate and key file for TLS configuration of client.
+// SetTLSKeyCrt sets the certificate and key file for TLS configuration of client.
 func (c *Client) SetTLSKeyCrt(crtFile, keyFile string) error {
 	tlsConfig, err := LoadKeyCrt(crtFile, keyFile)
 	if err != nil {
-		return err
+		return gerror.WrapCode(gcode.CodeInternalError, err, "LoadKeyCrt failed")
 	}
 	if v, ok := c.Transport.(*http.Transport); ok {
 		tlsConfig.InsecureSkipVerify = true
 		v.TLSClientConfig = tlsConfig
 		return nil
 	}
-	return gerror.New(`cannot set TLSClientConfig for custom Transport of the client`)
+	return gerror.NewCode(gcode.CodeInternalError, `cannot set TLSClientConfig for custom Transport of the client`)
 }
 
-// SetTlsConfig sets the TLS configuration of client.
+// SetTLSConfig sets the TLS configuration of client.
 func (c *Client) SetTLSConfig(tlsConfig *tls.Config) error {
 	if v, ok := c.Transport.(*http.Transport); ok {
 		v.TLSClientConfig = tlsConfig
 		return nil
 	}
-	return gerror.New(`cannot set TLSClientConfig for custom Transport of the client`)
+	return gerror.NewCode(gcode.CodeInternalError, `cannot set TLSClientConfig for custom Transport of the client`)
 }
 
 // LoadKeyCrt creates and returns a TLS configuration object with given certificate and key files.

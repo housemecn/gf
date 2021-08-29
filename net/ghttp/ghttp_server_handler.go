@@ -7,6 +7,7 @@
 package ghttp
 
 import (
+	"github.com/gogf/gf/errors/gcode"
 	"github.com/gogf/gf/internal/intlog"
 	"net/http"
 	"os"
@@ -67,9 +68,13 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			if exception := recover(); exception != nil {
 				request.Response.WriteStatus(http.StatusInternalServerError)
 				if err, ok := exception.(error); ok {
-					s.handleErrorLog(gerror.Wrap(err, ""), request)
+					if code := gerror.Code(err); code != gcode.CodeNil {
+						s.handleErrorLog(err, request)
+					} else {
+						s.handleErrorLog(gerror.WrapCodeSkip(gcode.CodeInternalError, 1, err, ""), request)
+					}
 				} else {
-					s.handleErrorLog(gerror.Newf("%v", exception), request)
+					s.handleErrorLog(gerror.NewCodeSkipf(gcode.CodeInternalError, 1, "%+v", exception), request)
 				}
 			}
 		}

@@ -8,8 +8,8 @@ package gdb
 
 import (
 	"database/sql"
-	"fmt"
 	"github.com/gogf/gf/container/gset"
+	"github.com/gogf/gf/errors/gcode"
 	"reflect"
 
 	"github.com/gogf/gf/errors/gerror"
@@ -211,14 +211,13 @@ func (m *Model) doInsertWithOption(insertOption int) (result sql.Result, err err
 		}
 	}()
 	if m.data == nil {
-		return nil, gerror.New("inserting into table with empty data")
+		return nil, gerror.NewCode(gcode.CodeMissingParameter, "inserting into table with empty data")
 	}
 	var (
 		list            List
 		nowString       = gtime.Now().String()
 		fieldNameCreate = m.getSoftFieldNameCreated()
 		fieldNameUpdate = m.getSoftFieldNameUpdated()
-		fieldNameDelete = m.getSoftFieldNameDeleted()
 	)
 	newData, err := m.filterDataForInsertOrUpdate(m.data)
 	if err != nil {
@@ -276,18 +275,17 @@ func (m *Model) doInsertWithOption(insertOption int) (result sql.Result, err err
 			}
 
 		default:
-			return result, gerror.New(fmt.Sprint("unsupported list type:", kind))
+			return result, gerror.NewCodef(gcode.CodeInvalidParameter, "unsupported list type:%v", kind)
 		}
 	}
 
 	if len(list) < 1 {
-		return result, gerror.New("data list cannot be empty")
+		return result, gerror.NewCode(gcode.CodeMissingParameter, "data list cannot be empty")
 	}
 
 	// Automatic handling for creating/updating time.
 	if !m.unscoped && (fieldNameCreate != "" || fieldNameUpdate != "") {
 		for k, v := range list {
-			gutil.MapDelete(v, fieldNameCreate, fieldNameUpdate, fieldNameDelete)
 			if fieldNameCreate != "" {
 				v[fieldNameCreate] = nowString
 			}
@@ -366,7 +364,11 @@ func (m *Model) formatDoInsertOption(insertOption int, columnNames []string) (op
 					}
 
 				default:
-					return option, gerror.Newf(`unsupported OnDuplicate parameter type "%s"`, reflect.TypeOf(m.onDuplicate))
+					return option, gerror.NewCodef(
+						gcode.CodeInvalidParameter,
+						`unsupported OnDuplicate parameter type "%s"`,
+						reflect.TypeOf(m.onDuplicate),
+					)
 				}
 			}
 		} else if onDuplicateExKeySet.Size() > 0 {
@@ -406,7 +408,11 @@ func (m *Model) formatOnDuplicateExKeys(onDuplicateEx interface{}) ([]string, er
 		return gconv.Strings(onDuplicateEx), nil
 
 	default:
-		return nil, gerror.Newf(`unsupported OnDuplicateEx parameter type "%s"`, reflect.TypeOf(onDuplicateEx))
+		return nil, gerror.NewCodef(
+			gcode.CodeInvalidParameter,
+			`unsupported OnDuplicateEx parameter type "%s"`,
+			reflect.TypeOf(onDuplicateEx),
+		)
 	}
 }
 

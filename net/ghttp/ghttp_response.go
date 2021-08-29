@@ -41,14 +41,16 @@ func newResponse(s *Server, w http.ResponseWriter) *Response {
 
 // ServeFile serves the file to the response.
 func (r *Response) ServeFile(path string, allowIndex ...bool) {
-	serveFile := (*staticFile)(nil)
+	var (
+		serveFile *staticFile
+	)
 	if file := gres.Get(path); file != nil {
 		serveFile = &staticFile{
 			File:  file,
 			IsDir: file.FileInfo().IsDir(),
 		}
 	} else {
-		path = gfile.RealPath(path)
+		path, _ = gfile.Search(path)
 		if path == "" {
 			r.WriteStatus(http.StatusNotFound)
 			return
@@ -60,7 +62,9 @@ func (r *Response) ServeFile(path string, allowIndex ...bool) {
 
 // ServeFileDownload serves file downloading to the response.
 func (r *Response) ServeFileDownload(path string, name ...string) {
-	serveFile := (*staticFile)(nil)
+	var (
+		serveFile *staticFile
+	)
 	downloadName := ""
 	if len(name) > 0 {
 		downloadName = name[0]
@@ -74,7 +78,7 @@ func (r *Response) ServeFileDownload(path string, name ...string) {
 			downloadName = gfile.Basename(file.Name())
 		}
 	} else {
-		path = gfile.RealPath(path)
+		path, _ = gfile.Search(path)
 		if path == "" {
 			r.WriteStatus(http.StatusNotFound)
 			return
@@ -110,7 +114,7 @@ func (r *Response) RedirectBack(code ...int) {
 	r.RedirectTo(r.Request.GetReferer(), code...)
 }
 
-// BufferString returns the buffered content as []byte.
+// Buffer returns the buffered content as []byte.
 func (r *Response) Buffer() []byte {
 	return r.buffer.Bytes()
 }
@@ -136,7 +140,7 @@ func (r *Response) ClearBuffer() {
 	r.buffer.Reset()
 }
 
-// Output outputs the buffer content to the client and clears the buffer.
+// Flush outputs the buffer content to the client and clears the buffer.
 func (r *Response) Flush() {
 	if r.Server.config.ServerAgent != "" {
 		r.Header().Set("Server", r.Server.config.ServerAgent)

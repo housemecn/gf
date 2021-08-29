@@ -8,6 +8,7 @@ package ghttp
 
 import (
 	"context"
+	"github.com/gogf/gf/errors/gcode"
 	"github.com/gogf/gf/errors/gerror"
 	"github.com/gogf/gf/internal/intlog"
 	"github.com/gogf/gf/os/gfile"
@@ -35,14 +36,17 @@ type UploadFiles []*UploadFile
 // Note that it will OVERWRITE the target file if there's already a same name file exist.
 func (f *UploadFile) Save(dirPath string, randomlyRename ...bool) (filename string, err error) {
 	if f == nil {
-		return "", gerror.New("file is empty, maybe you retrieve it from invalid field name or form enctype")
+		return "", gerror.NewCode(
+			gcode.CodeMissingParameter,
+			"file is empty, maybe you retrieve it from invalid field name or form enctype",
+		)
 	}
 	if !gfile.Exists(dirPath) {
 		if err = gfile.Mkdir(dirPath); err != nil {
 			return
 		}
 	} else if !gfile.IsDir(dirPath) {
-		return "", gerror.New(`parameter "dirPath" should be a directory path`)
+		return "", gerror.NewCode(gcode.CodeInvalidParameter, `parameter "dirPath" should be a directory path`)
 	}
 
 	file, err := f.Open()
@@ -76,7 +80,10 @@ func (f *UploadFile) Save(dirPath string, randomlyRename ...bool) (filename stri
 // The parameter <randomlyRename> specifies whether randomly renames all the file names.
 func (fs UploadFiles) Save(dirPath string, randomlyRename ...bool) (filenames []string, err error) {
 	if len(fs) == 0 {
-		return nil, gerror.New("file array is empty, maybe you retrieve it from invalid field name or form enctype")
+		return nil, gerror.NewCode(
+			gcode.CodeMissingParameter,
+			"file array is empty, maybe you retrieve it from invalid field name or form enctype",
+		)
 	}
 	for _, f := range fs {
 		if filename, err := f.Save(dirPath, randomlyRename...); err != nil {

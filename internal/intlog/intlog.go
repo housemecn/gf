@@ -63,6 +63,32 @@ func Errorf(ctx context.Context, format string, v ...interface{}) {
 	doPrint(ctx, fmt.Sprintf(format, v...), true)
 }
 
+// PrintFunc prints the output from function `f`.
+// It only calls function `f` if debug mode is enabled.
+func PrintFunc(ctx context.Context, f func() string) {
+	if !isGFDebug {
+		return
+	}
+	s := f()
+	if s == "" {
+		return
+	}
+	doPrint(ctx, s, false)
+}
+
+// ErrorFunc prints the output from function `f`.
+// It only calls function `f` if debug mode is enabled.
+func ErrorFunc(ctx context.Context, f func() string) {
+	if !isGFDebug {
+		return
+	}
+	s := f()
+	if s == "" {
+		return
+	}
+	doPrint(ctx, s, true)
+}
+
 func doPrint(ctx context.Context, content string, stack bool) {
 	if !isGFDebug {
 		return
@@ -71,8 +97,9 @@ func doPrint(ctx context.Context, content string, stack bool) {
 	buffer.WriteString(now())
 	buffer.WriteString(" [INTE] ")
 	buffer.WriteString(file())
+	buffer.WriteString(" ")
 	if s := traceIdStr(ctx); s != "" {
-		buffer.WriteString(" " + s)
+		buffer.WriteString(s + " ")
 	}
 	buffer.WriteString(content)
 	buffer.WriteString("\n")

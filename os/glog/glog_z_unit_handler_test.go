@@ -19,7 +19,7 @@ import (
 var arrayForHandlerTest1 = garray.NewStrArray()
 
 func customHandler1(ctx context.Context, input *glog.HandlerInput) {
-	arrayForHandlerTest1.Append(input.String())
+	arrayForHandlerTest1.Append(input.String(false))
 	input.Next()
 }
 
@@ -33,16 +33,12 @@ func TestLogger_SetHandlers1(t *testing.T) {
 		ctx = context.WithValue(ctx, "Span-Id", "abcdefg")
 
 		l.Ctx(ctx).Print(1, 2, 3)
-		t.Assert(gstr.Count(w.String(), "Trace-Id"), 1)
 		t.Assert(gstr.Count(w.String(), "1234567890"), 1)
-		t.Assert(gstr.Count(w.String(), "Span-Id"), 1)
 		t.Assert(gstr.Count(w.String(), "abcdefg"), 1)
 		t.Assert(gstr.Count(w.String(), "1 2 3"), 1)
 
 		t.Assert(arrayForHandlerTest1.Len(), 1)
-		t.Assert(gstr.Count(arrayForHandlerTest1.At(0), "Trace-Id"), 1)
 		t.Assert(gstr.Count(arrayForHandlerTest1.At(0), "1234567890"), 1)
-		t.Assert(gstr.Count(arrayForHandlerTest1.At(0), "Span-Id"), 1)
 		t.Assert(gstr.Count(arrayForHandlerTest1.At(0), "abcdefg"), 1)
 		t.Assert(gstr.Count(arrayForHandlerTest1.At(0), "1 2 3"), 1)
 	})
@@ -51,7 +47,7 @@ func TestLogger_SetHandlers1(t *testing.T) {
 var arrayForHandlerTest2 = garray.NewStrArray()
 
 func customHandler2(ctx context.Context, input *glog.HandlerInput) {
-	arrayForHandlerTest2.Append(input.String())
+	arrayForHandlerTest2.Append(input.String(false))
 }
 
 func TestLogger_SetHandlers2(t *testing.T) {
@@ -64,16 +60,12 @@ func TestLogger_SetHandlers2(t *testing.T) {
 		ctx = context.WithValue(ctx, "Span-Id", "abcdefg")
 
 		l.Ctx(ctx).Print(1, 2, 3)
-		t.Assert(gstr.Count(w.String(), "Trace-Id"), 0)
 		t.Assert(gstr.Count(w.String(), "1234567890"), 0)
-		t.Assert(gstr.Count(w.String(), "Span-Id"), 0)
 		t.Assert(gstr.Count(w.String(), "abcdefg"), 0)
 		t.Assert(gstr.Count(w.String(), "1 2 3"), 0)
 
 		t.Assert(arrayForHandlerTest2.Len(), 1)
-		t.Assert(gstr.Count(arrayForHandlerTest2.At(0), "Trace-Id"), 1)
 		t.Assert(gstr.Count(arrayForHandlerTest2.At(0), "1234567890"), 1)
-		t.Assert(gstr.Count(arrayForHandlerTest2.At(0), "Span-Id"), 1)
 		t.Assert(gstr.Count(arrayForHandlerTest2.At(0), "abcdefg"), 1)
 		t.Assert(gstr.Count(arrayForHandlerTest2.At(0), "1 2 3"), 1)
 	})

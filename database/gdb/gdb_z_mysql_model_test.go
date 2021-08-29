@@ -1938,7 +1938,7 @@ func Test_Model_Option_Map(t *testing.T) {
 	gtest.C(t, func(t *gtest.T) {
 		table := createTable()
 		defer dropTable(table)
-		r, err := db.Model(table).Option(gdb.OptionOmitEmpty).Data(g.Map{
+		r, err := db.Model(table).OmitEmptyData().Data(g.Map{
 			"id":       1,
 			"passport": 0,
 			"password": 0,
@@ -1958,7 +1958,7 @@ func Test_Model_Option_Map(t *testing.T) {
 	gtest.C(t, func(t *gtest.T) {
 		table := createInitTable()
 		defer dropTable(table)
-		_, err := db.Model(table).Option(gdb.OptionOmitEmpty).Data(g.Map{
+		_, err := db.Model(table).OmitEmptyData().Data(g.Map{
 			"id":       1,
 			"passport": 0,
 			"password": 0,
@@ -1994,7 +1994,7 @@ func Test_Model_Option_Map(t *testing.T) {
 	gtest.C(t, func(t *gtest.T) {
 		table := createTable()
 		defer dropTable(table)
-		_, err := db.Model(table).Option(gdb.OptionOmitEmpty).Data(g.Map{
+		_, err := db.Model(table).OmitEmptyData().Data(g.Map{
 			"id":       1,
 			"passport": 0,
 			"password": 0,
@@ -2031,7 +2031,7 @@ func Test_Model_Option_Map(t *testing.T) {
 		n, _ := r.RowsAffected()
 		t.Assert(n, 1)
 
-		_, err = db.Model(table).Option(gdb.OptionOmitEmpty).Data(g.Map{"nickname": ""}).Where("id", 2).Update()
+		_, err = db.Model(table).OmitEmptyData().Data(g.Map{"nickname": ""}).Where("id", 2).Update()
 		t.AssertNE(err, nil)
 
 		r, err = db.Model(table).OmitEmpty().Data(g.Map{"nickname": "", "password": "123"}).Where("id", 3).Update()
@@ -2132,23 +2132,74 @@ func Test_Model_Option_List(t *testing.T) {
 }
 
 func Test_Model_OmitEmpty(t *testing.T) {
-	gtest.C(t, func(t *gtest.T) {
-		table := fmt.Sprintf(`table_%s`, gtime.TimestampNanoStr())
-		if _, err := db.Exec(fmt.Sprintf(`
+	table := fmt.Sprintf(`table_%s`, gtime.TimestampNanoStr())
+	if _, err := db.Exec(fmt.Sprintf(`
     CREATE TABLE IF NOT EXISTS %s (
         id int(10) unsigned NOT NULL AUTO_INCREMENT,
         name varchar(45) NOT NULL,
         PRIMARY KEY (id)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
     `, table)); err != nil {
-			gtest.Error(err)
-		}
-		defer dropTable(table)
+		gtest.Error(err)
+	}
+	defer dropTable(table)
+
+	gtest.C(t, func(t *gtest.T) {
 		_, err := db.Model(table).OmitEmpty().Data(g.Map{
 			"id":   1,
 			"name": "",
 		}).Save()
 		t.AssertNE(err, nil)
+	})
+	gtest.C(t, func(t *gtest.T) {
+		_, err := db.Model(table).OmitEmptyData().Data(g.Map{
+			"id":   1,
+			"name": "",
+		}).Save()
+		t.AssertNE(err, nil)
+	})
+	gtest.C(t, func(t *gtest.T) {
+		_, err := db.Model(table).OmitEmptyWhere().Data(g.Map{
+			"id":   1,
+			"name": "",
+		}).Save()
+		t.Assert(err, nil)
+	})
+}
+
+func Test_Model_OmitNil(t *testing.T) {
+	table := fmt.Sprintf(`table_%s`, gtime.TimestampNanoStr())
+	if _, err := db.Exec(fmt.Sprintf(`
+    CREATE TABLE IF NOT EXISTS %s (
+        id int(10) unsigned NOT NULL AUTO_INCREMENT,
+        name varchar(45) NOT NULL,
+        PRIMARY KEY (id)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+    `, table)); err != nil {
+		gtest.Error(err)
+	}
+	defer dropTable(table)
+
+	gtest.C(t, func(t *gtest.T) {
+		_, err := db.Model(table).OmitNil().Data(g.Map{
+			"id":   1,
+			"name": nil,
+		}).Save()
+		t.AssertNE(err, nil)
+	})
+	gtest.C(t, func(t *gtest.T) {
+		_, err := db.Model(table).OmitNil().Data(g.Map{
+			"id":   1,
+			"name": "",
+		}).Save()
+		t.Assert(err, nil)
+	})
+	gtest.C(t, func(t *gtest.T) {
+		_, err := db.Model(table).OmitNilWhere().Data(g.Map{
+			"id":   1,
+			"name": "",
+		}).Save()
+		t.Assert(err, nil)
 	})
 }
 
@@ -2288,6 +2339,21 @@ func Test_Model_Prefix(t *testing.T) {
 		t.Assert(len(r), 2)
 		t.Assert(r[0]["id"], "1")
 		t.Assert(r[1]["id"], "2")
+	})
+	// Select with alias to struct.
+	gtest.C(t, func(t *gtest.T) {
+		type User struct {
+			Id       int
+			Passport string
+			Password string
+			NickName string
+		}
+		var users []User
+		err := db.Model(table+" u").Where("u.id in (?)", g.Slice{1, 5}).Order("u.id asc").Scan(&users)
+		t.AssertNil(err)
+		t.Assert(len(users), 2)
+		t.Assert(users[0].Id, 1)
+		t.Assert(users[1].Id, 5)
 	})
 	// Select with alias and join statement.
 	gtest.C(t, func(t *gtest.T) {
@@ -3727,5 +3793,81 @@ func Test_Model_Raw(t *testing.T) {
 			Count()
 		t.AssertNil(err)
 		t.Assert(count, 6)
+	})
+}
+
+func Test_Model_Handler(t *testing.T) {
+	table := createInitTable()
+	defer dropTable(table)
+
+	gtest.C(t, func(t *gtest.T) {
+		m := db.Model(table).Safe().Handler(
+			func(m *gdb.Model) *gdb.Model {
+				return m.Page(0, 3)
+			},
+			func(m *gdb.Model) *gdb.Model {
+				return m.Where("id", g.Slice{1, 2, 3, 4, 5, 6})
+			},
+			func(m *gdb.Model) *gdb.Model {
+				return m.OrderDesc("id")
+			},
+		)
+		all, err := m.All()
+		t.AssertNil(err)
+		t.Assert(len(all), 3)
+		t.Assert(all[0]["id"], 6)
+		t.Assert(all[2]["id"], 4)
+	})
+}
+
+func Test_Model_FieldCount(t *testing.T) {
+	table := createInitTable()
+	defer dropTable(table)
+
+	gtest.C(t, func(t *gtest.T) {
+		all, err := db.Model(table).Fields("id").FieldCount("id", "total").Group("id").OrderAsc("id").All()
+		t.AssertNil(err)
+		t.Assert(len(all), TableSize)
+		t.Assert(all[0]["id"], 1)
+		t.Assert(all[0]["total"], 1)
+	})
+}
+
+func Test_Model_FieldMax(t *testing.T) {
+	table := createInitTable()
+	defer dropTable(table)
+
+	gtest.C(t, func(t *gtest.T) {
+		all, err := db.Model(table).Fields("id").FieldMax("id", "total").Group("id").OrderAsc("id").All()
+		t.AssertNil(err)
+		t.Assert(len(all), TableSize)
+		t.Assert(all[0]["id"], 1)
+		t.Assert(all[0]["total"], 1)
+	})
+}
+
+func Test_Model_FieldMin(t *testing.T) {
+	table := createInitTable()
+	defer dropTable(table)
+
+	gtest.C(t, func(t *gtest.T) {
+		all, err := db.Model(table).Fields("id").FieldMin("id", "total").Group("id").OrderAsc("id").All()
+		t.AssertNil(err)
+		t.Assert(len(all), TableSize)
+		t.Assert(all[0]["id"], 1)
+		t.Assert(all[0]["total"], 1)
+	})
+}
+
+func Test_Model_FieldAvg(t *testing.T) {
+	table := createInitTable()
+	defer dropTable(table)
+
+	gtest.C(t, func(t *gtest.T) {
+		all, err := db.Model(table).Fields("id").FieldAvg("id", "total").Group("id").OrderAsc("id").All()
+		t.AssertNil(err)
+		t.Assert(len(all), TableSize)
+		t.Assert(all[0]["id"], 1)
+		t.Assert(all[0]["total"], 1)
 	})
 }

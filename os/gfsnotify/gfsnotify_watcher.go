@@ -8,25 +8,27 @@ package gfsnotify
 
 import (
 	"context"
+	"github.com/gogf/gf/errors/gcode"
 	"github.com/gogf/gf/errors/gerror"
 	"github.com/gogf/gf/internal/intlog"
 
 	"github.com/gogf/gf/container/glist"
 )
 
-// Add monitors <path> with callback function <callbackFunc> to the watcher.
-// The optional parameter <recursive> specifies whether monitoring the <path> recursively,
+// Add monitors `path` with callback function `callbackFunc` to the watcher.
+// The optional parameter `recursive` specifies whether monitoring the `path` recursively,
 // which is true in default.
 func (w *Watcher) Add(path string, callbackFunc func(event *Event), recursive ...bool) (callback *Callback, err error) {
 	return w.AddOnce("", path, callbackFunc, recursive...)
 }
 
-// AddOnce monitors <path> with callback function <callbackFunc> only once using unique name
-// <name> to the watcher. If AddOnce is called multiple times with the same <name> parameter,
-// <path> is only added to monitor once.
-// It returns error if it's called twice with the same <name>.
+// AddOnce monitors `path` with callback function `callbackFunc` only once using unique name
+// `name` to the watcher. If AddOnce is called multiple times with the same `name` parameter,
+// `path` is only added to monitor once.
 //
-// The optional parameter <recursive> specifies whether monitoring the <path> recursively,
+// It returns error if it's called twice with the same `name`.
+//
+// The optional parameter `recursive` specifies whether monitoring the `path` recursively,
 // which is true in default.
 func (w *Watcher) AddOnce(name, path string, callbackFunc func(event *Event), recursive ...bool) (callback *Callback, err error) {
 	w.nameSet.AddIfNotExistFuncLock(name, func() bool {
@@ -65,7 +67,7 @@ func (w *Watcher) AddOnce(name, path string, callbackFunc func(event *Event), re
 func (w *Watcher) addWithCallbackFunc(name, path string, callbackFunc func(event *Event), recursive ...bool) (callback *Callback, err error) {
 	// Check and convert the given path to absolute path.
 	if t := fileRealPath(path); t == "" {
-		return nil, gerror.Newf(`"%s" does not exist`, path)
+		return nil, gerror.NewCodef(gcode.CodeInvalidParameter, `"%s" does not exist`, path)
 	} else {
 		path = t
 	}
@@ -99,8 +101,6 @@ func (w *Watcher) addWithCallbackFunc(name, path string, callbackFunc func(event
 	}
 	// Add the callback to global callback map.
 	callbackIdMap.Set(callback.Id, callback)
-
-	//intlog.Print("addWithCallbackFunc", name, path, callback.recursive)
 	return
 }
 
@@ -113,7 +113,7 @@ func (w *Watcher) Close() {
 	close(w.closeChan)
 }
 
-// Remove removes monitor and all callbacks associated with the <path> recursively.
+// Remove removes monitor and all callbacks associated with the `path` recursively.
 func (w *Watcher) Remove(path string) error {
 	// Firstly remove the callbacks of the path.
 	if r := w.callbacks.Remove(path); r != nil {
